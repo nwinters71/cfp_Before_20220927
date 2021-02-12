@@ -1,0 +1,513 @@
+/** DARK THEME **/
+
+/* home page */
+.theme-dark .home-page {
+	background-image: url('/wi/inVIP/img/dark-bg.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+
+
+/** BLUE THEME **/
+
+/* basic styles */
+.theme-blue,
+.theme-blue .text-color-yellow,
+.theme-blue .message-content,
+.theme-blue .message-footer,
+.theme-blue .message-header,
+.theme-blue .list,
+.theme-blue .appbar i {
+	color: #607982 !important;
+}
+
+/* home page */
+.theme-blue .home-page {
+	background-image: url('/wi/inVIP/img/bg.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/* links */
+.theme-blue a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+/* main background colors */ 
+.theme-blue .page-content,
+.theme-blue .popup-chatnotes,
+.theme-blue .list ul {
+	background-color: #F0FBFF !important;
+}
+
+.theme-blue .panel-left .page-content,
+.theme-blue .panel-right .page-content {
+	background-image: none;
+}
+
+/* app, toolbar bg color */
+.theme-blue .appbar,
+.theme-blue .popup .toolbar,
+.theme-blue .toolbar-bottom {
+	background-color: #003C57 !important;
+}
+
+/* text color for appbar, toolbar */
+.theme-blue .appbar .appbar-inner,
+.theme-blue .appbar .appbar-inner .link,
+.theme-blue .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #F0FBFF !important;
+}
+
+/* close button */
+.theme-blue .popup .toolbar .f7-icons {
+	filter: invert(1);
+}
+
+/* notes popup header text color */
+.theme-blue .popup .toolbar .toolbar-inner .text-color-yellow,
+.theme-blue .toolbar-bottom .toolbar-inner .tabbar-label,
+.theme-blue .toolbar-bottom .toolbar-inner .f7-icons {
+	color: white !important;
+}
+
+/* navbar bg color */
+.theme-blue .navbar-bg {
+	background-color: #aec6cf !important;
+}
+
+/* main TI logo */
+.theme-blue .ti-logo { background-image: url('/Images/TILogo_500x240_Black.png'); }
+
+/* timeline font color */
+.theme-blue .timeline .text-color-yellow,
+.theme-blue .timeline .timeline-item-time {
+	color: #000 !important;
+}
+
+/* chat screen message text */
+.theme-blue input[name="msg"] {
+	color: black;
+	border: solid 1px #777;
+	border-left: none;
+	border-right: none;
+}
+
+/* chat screen message placeholder text */ 
+.theme-blue input[name="msg"]::placeholder {
+	color: black;
+}
+
+
+
+
+/** LIGHT THEME **/
+
+/* basic styles */
+.theme-light,
+.theme-light .text-color-yellow,
+.theme-light .message-content,
+.theme-light .message-footer,
+.theme-light .message-header,
+.theme-light .list,
+.theme-light .appbar i {
+	color: black !important;
+}
+
+/* links */
+.theme-light a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+/* main background colors */ 
+.theme-light .page-content,
+.theme-light .popup-chatnotes,
+.theme-light .list ul {
+	background-color: white !important;
+}
+
+.theme-light .panel-left .page-content,
+.theme-light .panel-right .page-content {
+	background-image: none;
+}
+
+/* app, toolbar bg color */
+.theme-light .appbar,
+.theme-light .popup .toolbar {
+	background-color: #d2d2d2;
+}
+
+/* text color for appbar, toolbar */
+.theme-light .appbar .appbar-inner,
+.theme-light .appbar .appbar-inner .link,
+.theme-light .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #333 !important;
+}
+
+/* close button */
+.theme-light .popup .toolbar .f7-icons {
+	/*filter: invert(1);*/
+}
+
+/* navbar bg color */
+.theme-light .navbar-bg {
+	background-color: #aec6cf !important;
+}
+
+/* main TI logo */
+.theme-light .ti-logo { background-image: url('/Images/TILogo_500x240_Black.png'); }
+
+/* timeline font color */
+.theme-light .timeline .text-color-yellow,
+.theme-light .timeline .timeline-item-time,
+.theme-light .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #000 !important;
+}
+
+/* chat screen message text */
+.theme-light input[name="msg"] {
+	color: black;
+	border: solid 1px #777;
+	border-left: none;
+	border-right: none;
+}
+
+/* chat screen message placeholder text */ 
+.theme-light input[name="msg"]::placeholder {
+	color: black;
+}
+
+
+
+
+/** ORANGE THEME **/
+
+/* basic styles */
+.theme-orange,
+.theme-orange .text-color-yellow,
+.theme-orange .message-content,
+.theme-orange .message-footer,
+.theme-orange .message-header,
+.theme-orange .list,
+.theme-orange .appbar i {
+	color: #006CB0 !important;
+}
+
+/* links */
+.theme-orange a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+/* main background colors */ 
+.theme-orange .page-content,
+.theme-orange .popup-chatnotes,
+.theme-orange .list ul {
+	background-color: #ffb347 !important;
+}
+
+.theme-orange .panel-left .page-content,
+.theme-orange .panel-right .page-content {
+	background-image: none;
+}
+
+/* app, toolbar bg color */
+.theme-orange .appbar,
+.theme-orange .popup .toolbar {
+	background-color: #B37929 !important;
+}
+
+/* text color for appbar, toolbar */
+.theme-orange .appbar .appbar-inner,
+.theme-orange .appbar .appbar-inner .link,
+.theme-orange .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #fff !important;
+}
+
+/* close button */
+.theme-orange .popup .toolbar .f7-icons {
+	filter: invert(1);
+}
+
+/* navbar bg color */
+.theme-orange .navbar-bg {
+	background-color: #1273B0 !important;
+}
+
+/* navbar title */
+.theme-orange .navbar .title {
+	color: #fff;
+}
+
+/* main TI logo */
+.theme-orange .ti-logo { background-image: url('/Images/TILogo_500x240_Black.png'); }
+
+/* timeline font color */
+.theme-orange .timeline .text-color-yellow,
+.theme-orange .timeline .timeline-item-time,
+.theme-orange .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #fff !important;
+}
+
+/* timeline entry background color */
+.theme-orange .timeline-item-inner {
+	background-color: #47B8FF !important;
+}
+
+/* chat screen message text */
+.theme-orange input[name="msg"] {
+	color: black;
+	border: solid 1px #777;
+	border-left: none;
+	border-right: none;
+}
+
+/* chat screen message placeholder text */ 
+.theme-orange input[name="msg"]::placeholder {
+	color: black;
+}
+
+
+
+
+
+/** GREEN THEME **/
+
+/* basic styles */
+.theme-green,
+.theme-green .text-color-yellow,
+.theme-green .message-content,
+.theme-green .message-footer,
+.theme-green .message-header,
+.theme-green .list,
+.theme-green .appbar i {
+	/* color: #8F0047 !important; */
+	color: #333 !important;
+}
+
+
+/* links */
+.theme-green a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+/* main background colors */ 
+.theme-green .page-content,
+.theme-green .popup-chatnotes,
+.theme-green .list ul {
+	background-color: #77dd77 !important;
+}
+
+.theme-green .panel-left .page-content,
+.theme-green .panel-right .page-content {
+	background-image: none;
+}
+
+/* app, toolbar bg color */
+.theme-green .appbar,
+.theme-green .popup .toolbar {
+	background-color: #409140 !important;
+}
+
+/* text color for appbar, toolbar */
+.theme-green .appbar .appbar-inner,
+.theme-green .appbar .appbar-inner .link,
+.theme-green .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #F0FBFF !important;
+}
+
+/* close button */
+.theme-green .popup .toolbar .f7-icons {
+	filter: invert(1);
+}
+
+/* navbar bg color */
+.theme-green .navbar-bg {
+	background-color: #006600 !important;
+}
+
+/* navbar title */
+.theme-green .navbar .title {
+	color: #fff;
+}
+
+/* main TI logo */
+.theme-green .ti-logo { background-image: url('/Images/TILogo_500x240_Black.png'); }
+
+/* timeline entry background color */
+.theme-green .timeline-item-inner {
+	background-color: #459145 !important;
+}
+
+/* timeline font color (overdue) */
+.theme-green .timeline .text-color-red {
+	color: #8F1C55 !important;
+}
+
+/* timeline font color (standard) */
+.theme-green .timeline .text-color-yellow,
+.theme-green .timeline .timeline-item-time,
+.theme-green .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #f2f2f2 !important;
+}
+
+/* chat screen message text */
+.theme-green input[name="msg"] {
+	color: black;
+	border: solid 1px #777;
+	border-left: none;
+	border-right: none;
+}
+
+/* chat screen message placeholder text */ 
+.theme-orange input[name="msg"]::placeholder {
+	color: black;
+}
+
+
+
+/** PURPLE THEME **/
+
+
+/* basic styles */
+.theme-purple,
+.theme-purple .text-color-yellow,
+.theme-purple .message-content,
+.theme-purple .message-footer,
+.theme-purple .message-header,
+.theme-purple .list,
+.theme-purple .appbar i {
+	/* color: #8F0047 !important; */
+	color: #6A578C !important;
+}
+
+
+/* links */
+.theme-purple a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+/* main background colors */ 
+.theme-purple .page-content,
+.theme-purple .popup-chatnotes,
+.theme-purple .list ul {
+	background-color: #E1D1FF !important;
+}
+
+.theme-purple .panel-left .page-content,
+.theme-purple .panel-right .page-content {
+	background-image: none;
+}
+
+/* app, toolbar bg color */
+.theme-purple .appbar,
+.theme-purple .popup .toolbar {
+	background-color: #b19cd9 !important;
+}
+
+/* text color for appbar, toolbar */
+.theme-purple .appbar .appbar-inner,
+.theme-purple .appbar .appbar-inner .link,
+.theme-purple .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #fff !important;
+}
+
+/* close button */
+.theme-purple .popup .toolbar .f7-icons {
+	filter: invert(1);
+}
+
+/* navbar bg color */
+.theme-purple .navbar-bg {
+	background-color: #9281B3 !important;
+}
+
+/* navbar title */
+.theme-purple .navbar .title {
+	color: #fff;
+}
+
+/* main TI logo */
+.theme-purple .ti-logo { background-image: url('/Images/TILogo_500x240_Black.png'); }
+
+/* timeline entry background color */
+.theme-purple .timeline-item-inner {
+	background-color: #9281B3 !important;
+}
+
+/* timeline font color (overdue) */
+.theme-purple .timeline .text-color-red {
+	color: #8F1C55 !important;
+}
+
+/* timeline font color (standard) */
+.theme-purple .timeline .text-color-yellow,
+.theme-purple .timeline .timeline-item-time,
+.theme-purple .popup .toolbar .toolbar-inner .text-color-yellow {
+	color: #fff !important;
+}
+
+/* chat screen message text */
+.theme-purple input[name="msg"] {
+	color: black;
+	border: solid 1px #777;
+	border-left: none;
+	border-right: none;
+}
+
+/* chat screen message placeholder text */ 
+.theme-purple input[name="msg"]::placeholder {
+	color: black;
+}
+
+
+
+/** INCOMPLETE THEMES BELOW **/
+
+
+
+
+
+/** BROWN THEME **/
+.theme-brown,
+.theme-brown .text-color-yellow,
+.theme-brown .message-content,
+.theme-brown .message-footer,
+.theme-brown .message-header,
+.theme-brown .list,
+.theme-brown .appbar i {
+	color: #36281C !important;
+}
+
+.theme-brown .page-content,
+.theme-brown .popup-chatnotes,
+.theme-brown .list ul {
+	background-color: #CFB197 !important;
+}
+
+.theme-brown .panel-left .page-content,
+.theme-brown .panel-right .page-content {
+	background-image: none;
+}
+
+.theme-brown .appbar,
+.theme-brown .popup .toolbar,
+.theme-brown .navbar-bg {
+	background-color: #836953 !important;
+}
+
+.theme-brown a {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+
+
+
+
+

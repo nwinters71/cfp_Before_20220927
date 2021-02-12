@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" type="image/ico"  href="/cfpimages/golden-ticket.png" />
+  <title>College Fast Pass</title>
+
+  <script src="./assets/vendor/jquery/jquery.min.js" language="JavaScript" type="text/javascript"></script>
+  <!-- <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js" language="JavaScript" type="text/javascript"></script> -->
+  <script src="./assets/js/cfp-grid.js" language="JavaScript" type="text/javascript"></script>
+  
+  <!-- <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" type="text/css" href="./assets/css/cfp-grid.css">
+  <link rel="stylesheet" href="assets/vendor/w3schools/w3.css">
+
+
+
+<style>
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 702px 50px 370px 1fr;
+  align-items: top;
+}
+.grid-item {
+}
+.link-grid-container {
+/*border: thin silver solid;*/
+  display: grid;
+  grid-template-columns: 300px 50px 50px 50px 50px 50px 50px 50px 50px;
+  z-index: 500;
+  background-color:white; 
+}
+/* link grid item */
+.lgiHeader {
+	border: thin cyan solid;
+	width: 100%;
+}
+
+.zlgiHeader {
+	bottom: 0;
+    display: inline-block;
+    font-weight: 400;
+    height: 20px;
+    margin: 0 0 24px 12px;
+    padding: 0;
+    text-align: left;
+    transform: rotate(-90deg);
+    transform-origin: left;
+    white-space: nowrap;
+    width: 20px;
+}
+#gridWrapper {
+	border: thin silver solid;
+	margin-top: 80px;
+}
+lgi {
+	text-align: center;
+	border: thin red solid;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+	<!-- Navigation -->
+	<div id="nav"></div>
+
+	<!-- Page Content -->
+
+<!-- <div class="container"> -->
+
+<div class="grid-container">
+	<div class="grid-item"></div>
+	<div id="thegrid" class="grid-item">
+		<div>
+			<div class="blankrow"><img src="/cfpimages/space.png" width="100%" height="30px" style="margin-top: 30px">
+			</div>
+			<div id="gridWrapper">
+				<div id="idWidget2" class="link-grid-container">
+					<div class="lgi"></div>
+					<div class="browse lgi" value="-7"><img height="16px" src="/cfpimages/browse-left-double.png" /></div>
+					<div class="browse lgi" value="-1"><img height="16px" src="/cfpimages/browse-left-single.png" /></div>
+					<div class="lgiTitle" style="grid-column-start:4; grid-column-end:span 4; text-align:center">Howdy</div>
+					<div class="browse lgi" value="1"><img height="16px" src="/cfpimages/browse-right-single.png" /></div>
+					<div class="browse lgi" value="7"><img height="16px" src="/cfpimages/browse-right-double.png" /></div>
+<!-- 
+<div class="lgiHeader"></div>
+<div class="lgiHeader" value="jrbeu">
+	<div class="header-content2" style="margin-left:310px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/BucknellU.png" title="" schoolid="jrbeu"> <span class="SchoolName">Bucknell University</span></div>
+</div>
+<div class="lgiHeader" value="dwlnr">
+	<div class="header-content2" style="margin-left:360px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/caltech.png" title="" schoolid="dwlnr"> <span class="SchoolName">CalTech</span></div>
+</div>
+<div class="lgiHeader" value="ukbfe">
+	<div class="header-content2" style="margin-left:410px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/DukeU.png" title="" schoolid="ukbfe"> <span class="SchoolName">Duke University</span></div>
+</div>
+<div class="lgiHeader" value="w3nek">
+	<div class="header-content2" style="margin-left:460px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/georgiatech.png" title="" schoolid="w3nek"> <span class="SchoolName">Georgia Tech</span></div>
+</div>
+<div class="lgiHeader" value="bwjk2">
+	<div class="header-content2" style="margin-left:510px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/Harvard.png" title="" schoolid="bwjk2"> <span class="SchoolName">Harvard University</span></div>
+</div>
+<div class="lgiHeader" value="tx5xf">
+	<div class="header-content2" style="margin-left:560px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/MIT.png" title="" schoolid="tx5xf"> <span class="SchoolName">MIT</span></div>
+</div>
+<div class="lgiHeader" value="16268">
+	<div class="header-content2" style="margin-left:610px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/northwesternu.png" title="" schoolid="16268"> <span class="SchoolName">Northwestern University</span></div>
+</div>
+<div class="lgiHeader" value="v3z0i">
+	<div class="header-content2" style="margin-left:660px;"><img class="SchoolIcon" src="/cfpimages/schools/icons/batch/olincollege.png" title="" schoolid="v3z0i"> <span class="SchoolName">Olin College of Engineering</span></div>
+</div> -->
+
+
+<div class="lgi GridCell" style="background-color: rgb(238, 255, 238);"> <p> <img id="expand_subrowfi23" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" style=""><img id="collapse_subrowfi23" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" style="display: none;"> &nbsp; <img class="SiteIcon" src="/cfpimages/space.png"><span class="SiteName">Website</span></p></div>
+<div class="lgi">1</div>
+<div class="lgi">2</div>
+<div class="lgi">3</div>
+<div class="lgi">4</div>
+<div class="lgi">5</div>
+<div class="lgi">6</div>
+<div class="lgi">7</div>
+<div class="lgi">8</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid-item"></div>
+	<div class="grid-item">
+		<div id="rightsidebar" class="w3-card"></div>
+	</div>
+	<div class="grid-item"></div>
+</div>
+
+
+		<!-- Portfolio Item Row -->
+		<!-- <div id="thegrid" class="container row">
+			<div>
+				<div class="blankrow"><img src="/cfpimages/space.png" width="100%" height="30px" style="margin-top: 30px">
+				</div>
+				<div id="idWidget2">
+					<div id="EmptyBox" class="widget-header2"></div>
+				</div>
+			</div>
+			<div id="rightsidebar" class="col-md-4 w3-card"></div>
+		</div> --> <!-- / #thegrid -->
+
+<!-- </div> --> <!-- /.container -->
+
+	<!-- Footer -->
+	<div id="footer"></div>
+
+</body>
+
+<script>
+	setTimeout(function(){
+		getRightSidebar();
+		setSideBar('school', GridData.SCHOOLS.DATA[0][2]); // initiate sidebar to first school in dataset;
+	}, 400);
+</script>
+
+</html>
+

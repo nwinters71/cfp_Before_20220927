@@ -1,0 +1,127 @@
+/** LEFT PANEL **/
+.panel-left .col .f7-icons {
+	cursor: pointer;
+}
+
+/** HOME SCREEN **/
+.tip { 
+	background-color: #eeeeee88 !important; 
+	border-left: solid 3px #aaaaaa88 !important;"
+}
+
+
+/** STORYBOARD **/
+.storyboard-iframe {
+	border: none; 
+	background: transparent; 
+	width: 100%; 
+	height: calc(calc(var(--f7-toolbar-height) + var(--f7-safe-area-bottom)) + 100vh - calc(calc(var(--f7-navbar-height) + var(--f7-safe-area-top))));
+}
+
+.storyboard-page {
+	background-image: url('/wi/inVIP/img/EVA-LRG10.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.storyboard-page .fab {
+	z-index: 5000 !important;
+}
+
+.storyboard-view {
+	max-height: 90% !important;
+}
+
+
+
+
+
+
+/** STORYBOARD CONTROL PANEL - AGENT **/
+.storyboard-page-content .card-header {
+	height: 15vw;
+	background-size: cover;
+	background-position: center;
+}
+
+.storyboard-page-content .card-header span {
+	background-color: #00000088;
+	color: white;
+	padding: .5rem;
+}
+
+
+
+
+/** this can be deleted if we arent using trip GPA 
+#tripGPAGauge {
+	position: absolute;
+	right: 3rem;
+	top: 10rem;
+	background-color: white;
+	z-index: 9;
+}
+**/
+
+
+/** CHAT SCREEN **/
+#frm_agt_msg {
+	position: absolute;
+	bottom: calc(var(--f7-toolbar-height) + var(--f7-safe-area-bottom)) !important;
+	max-height: 15vh;
+	width: 100%;
+}
+
+.messages_wrapper {
+	height: calc(calc(100% - 15vh) - calc(calc(var(--f7-appbar-height) + var(--f7-safe-area-top)) + calc(var(--f7-navbar-height) + var(--f7-safe-area-top))));
+	overflow: auto;
+	margin-top: calc(calc(var(--f7-appbar-height) + var(--f7-safe-area-top)) + calc(var(--f7-navbar-height) + var(--f7-safe-area-top)));
+}
+
+.chat-screen-appbar {
+	position: fixed;
+	top: calc(var(--f7-navbar-height) + var(--f7-safe-area-top));
+}
+
+
+/** QUILL TEXT EDITOR (Chat Notes) **/
+.ql-toolbar, .ql-container {
+	border: solid 1px #222 !important;
+}
+
+
+/** default settings, actual images are overridden in themes.css **/
+.ti-logo {
+	width: 500px; 
+	height: 240px; 
+	display: block; 
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-top: 3vh;
+	background-image: url('/Images/TILogo_500x240_White.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/** call in progress icon in user list **/
+.call-status-icon {
+	margin-left: .25rem; 
+	font-size: 14px; 
+	color: green;
+}
+
+
+/** CHAT SCREEN | ADMIN PANEL **/
+.accordion-list li { list-style-type: none !important; }
+
+.admin-subheader { background-color: #DDDDDD88 !important; }
+
+
+
+
+
+
+
+
+

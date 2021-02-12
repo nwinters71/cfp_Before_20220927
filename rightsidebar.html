@@ -1,0 +1,247 @@
+<style>
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+w3-bar-item {
+	margin-left: 21px !important;
+}
+</style>
+ 
+<script>
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+</script>
+
+<div class="w3-card">
+
+	<div class="w3-container" style="padding:8px">
+		<img id="sb_icon"  src="" height="36px" style="margin:4px;" /> &nbsp;
+	  	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">Header</h4>
+		<img id="sb_image" src="" width="100%" height="200px" />
+	</div>
+
+	<!-- <div class="w3-container"> -->
+		<div class="w3-bar w3-blue">
+			<button class="w3-bar-item w3-button" style="margin-left: 1px" onclick="openCity('Admissions')">Admissions</button>
+			<button class="w3-bar-item w3-button" style="margin-left: 1px" onclick="openCity('Notes')">Notes</button>
+			<button class="w3-bar-item w3-button" style="margin-left: 1px" onclick="openCity('Info')">Info</button>
+		</div>
+
+		<div class="tabcontent" id="Admissions">
+			<br />
+			<strong style="font-size:15px">Admissions Stats</strong>
+			<table id="tblAdmissions" border="1" cellspacing="0" cellpadding="4" width="100%">
+			<thead>
+				<tr>
+					<td></td>
+					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Total</td>
+					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Men</td>
+					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Women</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">Applied:&nbsp;</td>
+					<td id="applcn"></td>
+					<td id="applcnm"></td>
+					<td id="applcnw"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">Admitted:&nbsp;</td>
+					<td id="admssn"></td>
+					<td id="admssnm"></td>
+					<td id="admssnw"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">Enrolled:&nbsp;</td>
+					<td id="enrlt"></td>
+					<td id="enrlm"></td>
+					<td id="enrlw"></td>
+				</tr>
+			</tbody>
+			</table>
+			<br />
+			<strong style="font-size:15px">Test Scores</strong>
+			<table id="tblScores" border="1" cellspacing="0" cellpadding="4" width="100%">
+			<thead>
+				<tr>
+					<td width="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">25th %</td>
+					<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">75th %</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">SAT Math:&nbsp;</td>
+					<td id="satmt25"></td>
+					<td id="satmt75"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">SAT EBRW:&nbsp;</td>
+					<td id="satvr25"></td>
+					<td id="satvr75"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">ACT Composite:&nbsp;</td>
+					<td id="actcm25"></td>
+					<td id="actcm75"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
+					<td id="actmt25"></td>
+					<td id="actmt75"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">ACT English:&nbsp;</td>
+					<td id="acten25"></td>
+					<td id="acten75"></td>
+				</tr>
+			</tbody>
+			</table>
+
+		</div>
+
+		<br />
+		<br />
+
+
+	<!-- </div> -->
+
+	<footer class="w3-container w3-blue">
+	  <h5>Footer</h5>
+	</footer>
+
+</div>
+
+<!-- <img id="side-image" src="./assets/images/school/image-harvard.jpg" width="100%" height="233" />
+<div class="msg"></div> -->
+<!-- <div style="margin-top:-6px;" />
+	<div style="float:left">
+		<img id="sb_icon"  src="" height="36px" /> &nbsp;
+	</div>
+	<h3 id="sb_schoolname" class="my-3">Test</h3>
+</div> -->
+
+<!-- <div width="100%">
+<div class="rsb_tab" id="tabNotes">Notes</div>
+<div class="rsb_tab" id="tabAdmissions">Admissions</div>
+<div class="rsb_tab" id="tabInfo">Info</div>
+</div> -->
+
+
+
+<!-- <div class="tab">
+	<button class="tablinks" onclick="openCity(event, 'Admissions')">Admissions</button>
+	<button class="tablinks" onclick="openCity(event, 'Notes')">Notes</button>
+	<button class="tablinks" onclick="openCity(event, 'Info')">Info</button>
+</div> -->
+
+<div id="Notes" class="tabcontent">
+
+	<strong style="font-size:15px">Interest: </strong>
+	<select id="sb_interest">
+		<option>Not Interested</option>
+		<option>Not Very</option>
+		<option>Neutral</option>
+		<option>Somewhat</option>
+		<option>Very</option>
+	</select>
+
+	<br />
+	<strong style="font-size:15px">Classification: </strong>
+	<select id="sb_interest">
+		<option></option>
+		<option>Safety</option>
+		<option>Target</option>
+		<option>Reach</option>
+	</select>
+
+	<br />
+	<strong style="font-size:15px">Status: </strong>
+	<select id="sb_status">
+		<option></option>
+		<option>Interested</option>
+		<option>Applied</option>
+		<option>Accepted</option>
+		<option>Waitlisted</option>
+		<option>Enrolled</option>
+		<option>Denied</option>
+	</select>
+	<br />
+	<strong style="font-size:15px">Notes</strong>
+	<br />
+	<textarea cols="34" rows="6" id="school_notes"></textarea>
+
+</div>
+
+
+
+<div id="Info" class="tabcontent">
+	<br /><strong style="font-size:15px">Contact Info</strong>
+	<table id="contactinfo" style="border: 0px; width: 100%">  <!-- background-color:#eee;  -->
+		<tr><td width="100px">Phone:</td><td><span id="sb_phone"></span></td></tr>            
+		<tr valign="top" style="margin-top:100px;">
+			<td>Address:</td>
+			<td><a id="side-address" target="_blank"><span id="sb_address_line1"></span><span id="sb_address_line2"></span></a></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" id="sb_map"></td>
+		</tr>
+	</table>          
+</div>
+
+<br /><br /><br /><br />&nbsp;
+
+

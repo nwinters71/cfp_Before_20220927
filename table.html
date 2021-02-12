@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://www.collegefastpass.com/table.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="shortcut icon" type="image/ico"  href="/cfpimages/golden-ticket.png" />
+
+    <title>College Fast Pass</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./table_files/portfolio-item.css" rel="stylesheet">
+    
+<script src="assets/vendor/jquery/jquery.min.js" language="JavaScript" type="text/javascript"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" language="JavaScript" type="text/javascript"></script>
+<script src="./table_files/data.js.download" language="JavaScript" type="text/javascript"></script>
+<script src="./assets/js/cfp.js" language="JavaScript" type="text/javascript"></script>
+<script src="./table_files/college.js.download" language="JavaScript" type="text/javascript"></script>
+<!-- <link rel="stylesheet" type="text/css" href="./table_files/college.css"> -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
+
+<!--
+<link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" language="JavaScript" type="text/javascript"></script>
+-->
+
+<link rel="stylesheet" type="text/css" href="./assets/vendor/DataTables/datatables.min.css">
+<script type="text/javascript" src="./assets/vendor/DataTables/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="assets/vendor/w3schools/w3.css">
+
+    
+<script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+  
+  $(document).ready( function () {
+/*
+      $('#cfpTable').DataTable( {
+        // "ajax": "collegeData.json",
+        "data":colleges,
+        "select":true,
+        "columns": [     
+            { "data": null,
+              "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = '<img height="24" src="assets/images/school/icons/' + row.icon.replace('.ico', '.jpg') + '"></img> <a target="_blank" href="' + row.logo + '">' + row.nickname + '</a>';
+                }
+                return data;
+              }
+            },
+            { "data": "nickname" },
+            { "data": "phone" }
+        ] }
+      );
+*/
+      $('#cfpTable').DataTable( {
+        "ajax": "assets/data/data1.json#",
+        // "data":colleges,
+        // "select":true,
+        "columnDefs": [
+          {
+              targets: -1,
+              className: 'dt-body-right'
+          },
+          {
+              targets: -2,
+              className: 'dt-body-right'
+          }
+        ],
+        "columns": [     
+          /*
+            { "data": null,
+              "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = '<img height="24" src="assets/images/school/icons/' + row.icon.replace('.ico', '.jpg') + '"></img> <a target="_blank" href="' + row.logo + '">' + row.nickname + '</a>';
+                }
+                return data;
+              }
+            },
+          */
+          //  { "data": "Name" },
+            { "data": null,
+             "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = '<b>' + row.Name + '</b><br />' + row.City + ', ' + row.State;
+                }
+                return data;
+              }
+            },
+            { "data": null,
+              "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = row.ACT25 + '<br />' + row.ACT75;
+                }
+                return data;
+              }
+            },
+            { "data": null,
+              "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = row.SATCR25 + '<br />' + row.SATCR75;
+                }
+                return data;
+              }
+            },
+            { "data": null,
+              "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = row.SATMath25 + '<br />' + row.SATMath75;
+                }
+                return data;
+              }
+            },
+            // { "data": "Applicants" },
+            // { "data": "Admissions" },
+            { "data": null,
+             "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = numberWithCommas(row.Applicants) + "<br />" + numberWithCommas(row.Admissions) + "<br />" + numberWithCommas(row.Enrolled);
+                }
+                return data;
+              },
+            },
+            { "data": "Application Fee",
+             "render": function(data, type, row, meta) {
+                if(type === 'display') {
+                  data = '$' + data;
+                }
+                return data;
+              }
+            }
+        ] }
+      );
+
+      $('.dataTable').on('click', 'tbody tr', function() {
+
+        // get textContent of the TD
+        console.log('TD cell textContent : ', this)
+
+        // get the value of the TD using the API 
+        // var table = $('#cfpTable').DataTable();        
+        // console.log('value by API : ', table.cell({ row: this.parentNode.rowIndex, column : this.cellIndex }).data());
+      })
+    });
+  
+</script>
+    
+    
+<style>
+ 
+</style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div id="nav"></div>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+<!--       <h1 class="my-4">College Fast Pass
+        <small>Secondary Text</small>
+      </h1> --><br>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+ <table id="cfpTable" class="table table-bordered">
+    <thead>
+      <tr>
+        <th><Name<br />Location</th>
+<!--               <th>Location</th> -->
+        <th>ACT<br />25%<br />75%</th>
+        <th>SAT EBRW<br />25%<br />75%</th>
+        <th>SAT Math<br />25%<br />75%</th>
+        <th>Applied<br />Admitted<br />Enrolled</th>
+        <th>App Fee</th>              
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table> 
+
+</div> 
+
+<br>&nbsp;
+<br>&nbsp;
+      <h2>
+        College Search        
+      </h2>
+      <li>Reference Sites</li>
+      <ul>
+         <li><a href="https://bigfuture.collegeboard.org/college-search" target="_blank">https://bigfuture.collegeboard.org/college-search</a></li>
+         <li><a href="https://www.princetonreview.com/college-search" target="_blank">https://www.princetonreview.com/college-search</a></li>
+         <li><a href="https://www.collegedata.com/cs/search/college/college_search_tmpl.jhtml" target="_blank">https://www.collegedata.com/cs/search/college/college_search_tmpl.jhtml</a></li>
+      </ul>
+        <table class="table" border="1">
+          <tbody><tr>
+            <td><strong>Test Scores &amp; Selectivity</strong></td>
+            <td>
+              <table class="xtable">
+              <tbody><tr>
+                <td align="middle"><strong>ACT</strong></td>
+                <td align="middle"><strong>SAT</strong></td>
+                <td align="middle"><strong>Selectivity</strong></td>
+              </tr>                
+              <tr>
+                <td><input name="ACTMIN" size="3"> - <input name="ACTMAX" size="3"></td>
+                <td><input name="SATMIN" size="4"> - <input name="SATMAX" size="4"></td>
+                <td><select name="loc_type" size="10" multiple="yes"><option>Most Selective</option><option>Very Selective</option><option>Somewhat Selective</option><option>Not Selective</option></select></td>
+              </tr>
+              </tbody></table>
+            </td>
+          </tr><tr>
+            <td><strong>Location and Size</strong></td>
+            <td>
+              <table class="xtable">
+              <tbody><tr>
+                <td><strong>Community</strong></td>
+                <td><strong>Region</strong></td>
+                <td><strong>State</strong></td>
+              </tr>
+              <tr>
+                <td><select name="loc_type" size="3" multiple="yes"><option>Urban</option><option>Suburban</option><option>Rural</option></select></td>
+                <td><select name="loc_region" size="6" multiple="yes"><option>Northeast</option><option>Mid-Atlantic</option><option>South</option><option>Midwest</option><option>Southwest</option><option>West</option></select></td>
+                <td><select name="loc_states" size="10" multiple="yes"><option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>District of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Kansasa</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Massachusetts</option></select></td>
+                <td><select name="loc_type" size="3" multiple="yes"><option>Small</option><option>Medium</option><option>Large</option></select></td>
+              </tr>
+              </tbody></table>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Academic Major</strong></td>
+            <td>
+                <select name="majors" multiple="yes" size="6">
+                    <option></option>
+                    <option>Art</option>
+                    <option>Business</option>
+                    <option>Computer Science</option>
+                    <option>Engineering</option>
+                    <option>Journalism</option>
+                    <option>Music</option>
+                    <option>Philosophy</option>
+                    <option>Science</option>
+                  </select>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Athletics, Clubs and Organizations</strong></td>
+            <td>
+                <select name="majors" multiple="yes" size="6">
+                    <option></option>
+                    <option>Art</option>
+                    <option>Business</option>
+                    <option>Computer Science</option>
+                    <option>Engineering</option>
+                    <option>Journalism</option>
+                    <option>Music</option>
+                    <option>Philosophy</option>
+                    <option>Science</option>
+                  </select>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Miscellaneous</strong></td>
+            <td>
+              <input type="Radio" name="misc" value="all"> All
+              <br><input type="Radio" name="misc" value="women"> Liberal Arts Colleges
+              <br><input type="Radio" name="misc" value="women"> Member of the Annapolis Group of Liberal Arts Colleges
+              <br><input type="Radio" name="misc" value="women"> Women's Only Colleges
+              <br><input type="Radio" name="misc" value="hbcu"> Historically Black Colleges and Universities (HBCU)
+              <br><input type="Radio" name="misc" value="ivy"> Ivy League Schools
+              <br><input type="Radio" name="misc" value="publicivy"> Public Ivies
+              <br><input type="Radio" name="misc" value="women"> Schools with Honors Colleges/Programs
+              <br><input type="Radio" name="misc" value="flagship"> State Flagship Schools
+              <br><input type="Radio" name="misc" value="ctcl"> CTCL (Colleges That Change Lives
+              <br><input type="Radio" name="misc" value="stamps"> Stamps Scholarship Schools
+              <br><input type="Radio" name="misc" value="questbridge"> Questbridge Schools
+              <br> Religious Affiliation <select name="religious_affiliation">
+                      <option></option>
+                      <option>Baptist</option>
+                      <option>Catholic</option>
+                      <option>Jewish</option>
+                      <option>Lutheran</option>
+                      <option>Methodist</option>
+                      <option>Presbyterian</option>
+                    </select>
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+
+
+
+
+<!-- Footer -->
+<div id="footer"></div>
+
+    <!-- Footer -->
+    <!-- <footer class="py-5 bg-dark">
+      <div class="container" width="80%">
+        <p class="m-0 text-center text-white">
+          <a class="footerlink" href="http://www.collegefastpass.com/table.html#">About</a>
+          <a class="footerlink" href="http://www.collegefastpass.com/table.html#">Contact</a>
+          <a class="footerlink" href="http://www.collegefastpass.com/table.html#">Privacy Statement</a>
+          <a class="footerlink" href="http://www.collegefastpass.com/table.html#">Terms of Service</a>
+        </p>
+        <p class="m-0 text-center text-white">&nbsp;</p>
+        <p class="m-0 text-center text-white">© 2018 College Fast Pass</p>
+        <p class="m-0 text-center text-white">&nbsp;</p>
+      </div>
+    </footer> -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!--script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script-->
+
+  
+
+
+</body></html>

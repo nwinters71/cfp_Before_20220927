@@ -1,0 +1,52 @@
+
+<div>
+<!-- 	<div class="list">
+		<ul>
+			<li class="item-content item-input item-input-outline">
+				<div class="item-inner">
+					<div class="item-input-wrap input-dropdown-wrap"> -->
+						<select name="Table" size="10" v-model="selectedTable" @change="getFields()">
+							<option v-for="t in Tables" v-bind:value="t.TableNumber">{{ t.Survey}} ({{ t.TableName}})</option>
+						</select>
+						
+						<div>selectedTable: {{ selectedTable }}</div>
+						
+						<select name="Field" size="10" v-model="selectedField" @change="getValues()">
+							<option v-for="f in Fields" v-bind:value="f.VarNumber">{{ f.VarTitle}}</option>
+						</select>
+
+						<div>selectedField: {{ selectedField }}</div>
+						
+						<select name="Value" size="10" v-model="selectedField">
+							<option v-for="v in Values" v-bind:value="v.CodeValue">{{ v.CodeValue }} - {{ v.Percent }} - {{ v.ValueLabel}}</option>
+						</select>
+<!-- 					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+ -->
+
+
+	<!-- LOYALTY PROGRAMS -->
+	<!-- <div class="tab" id="l3tab4">
+		<div class="block-title block-title-medium searchbar-found">Tables</div>
+		<div class="data-table">
+			<table border="1">
+				<thead>
+					<tr>
+						<th class="">Survey</th>
+						<th class="">Table</th>
+					</tr>
+				</thead>
+				<tbody id="tables">
+					<tr v-for="t in vTables">
+						<td class="">{{ t.Survey }}</td>
+						<td class="">{{ t.TableName }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div> -->
+
+</div>

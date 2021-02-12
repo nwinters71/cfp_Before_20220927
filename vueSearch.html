@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="shortcut icon" type="image/ico"  href="/cfpimages/golden-ticket.png" />
+
+  <title>College Fast Pass</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+<!--   <link href="./assets/css/portfolio-item.css" rel="stylesheet"> -->
+
+<script src="./assets/vendor/jquery/jquery.min.js" language="JavaScript" type="text/javascript"></script>
+
+<!-- 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js" language="JavaScript" type="text/javascript"></script>
+<script src="./assets/js/cfp.js" language="JavaScript" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./assets/css/cfp.css">
+
+
+<script src="./assets/js/vueSearch.js" language="JavaScript" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./assets/css/search.css">
+
+<link rel="stylesheet" href="assets/vendor/w3schools/w3.css">
+<script src="https://unpkg.com/vue"></script>
+
+<script>
+	function test() {
+		// alert("Hello");
+		console.log(search);
+		search.keyword = 'Alabama';
+		search.getSchools();
+	}
+</script>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div id="nav"></div>
+
+<!-- Page Content -->
+<div id="vueSearch" class="container">
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <!-- <div id="leftsidenav" class="col-md-4"> -->
+    <div class="col-md-4">
+      
+      <div id="searchOptions">
+
+        <button @click="getMySchools();">My Schools</button>
+        <button onclick="test()">Test</button>
+
+        <div class="label"><strong>School Name:</strong></div>
+        <div>
+          <input class="searchInput" id="keyword" type="text" size="14" v-model="keyword" @keypress="getSchools" />
+          <button onclick="doSearch()">Search</button>
+        </div>
+
+        <div class="section" onclick="toggle('admissions')">Admissions Criteria</div>
+        <div id="admissions">
+          <div class="label">Acceptance Rate:</div>
+          <div class="searchcontainer" style="height: auto;">
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> &lt;10%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 10%-20%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 20%-30%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 30%-40%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 40%-50%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 50%-60%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 60%-80%</span>
+            <span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 80%+</span>
+          </div>    
+        
+          <div class="label">Test Scores:</div>
+          <!-- <div class="searchcontainer" style="height:auto"> -->
+            <!-- <div class="label">SAT</div>
+            <table border="0" cellspacing="0" cellpadding="8" width="100%">
+              <tr valign="top">
+                <td width="110px"><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderSATcomp" checked /> Composite:</div><div id="amount" /></div></td>
+                <td width="100%" align="center"><div id="sliderSATcomp" class="ui-state-disabled"></div>
+                  <div style="margin-top:4px;"><input type="input" id="satcomp" class="sliderText" /></div></td>
+              </tr>
+              <tr valign="top">
+                <td><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderSATmath" /> Math:</div><div id="amount" /></div></td>
+                <td width="100%" align="center"><div id="sliderSATmath" class="ui-state-disabled"></div>
+                  <div style="margin-top:4px;"><input type="input" id="satmath" class="sliderText" /></div></td>
+              </tr>
+              <tr valign="top">
+                <td><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderSATebrw" /> EBRW:</div><div id="amount" /></div></td>
+                <td width="100%" align="center"><div id="sliderSATebrw" class="ui-state-disabled"></div>
+                  <div style="margin-top:4px;"><input type="input" id="satebrw" class="sliderText" /></div></td>
+              </tr>
+            </table>
+            <div class="label">ACT</div>
+            <table border="0" cellspacing="0" cellpadding="8" width="100%">
+              <tr valign="top">
+                <td width="110px"><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderACTcomp" /> Composite:</div><div id="amount" /></div></td>
+                <td width="100%" align="center"><div id="sliderACTcomp" class="ui-state-disabled"></div>
+                  <div style="margin-top:4px;"><input type="input" id="actcomp" class="sliderText" /></div></td>
+              </tr>
+            </table> -->
+          <!-- </div> -->
+        </div>
+
+
+        <div class="section" onclick="toggle('community')">Community</div>
+        <div id="community">
+          <div class="label">School Size:</div>
+          <div class="searchcontainer" style="height: auto;">
+              <input id="population" type="checkbox" value="AL" /> Very Small (<1,000 students)
+            <br /><input id="population" type="checkbox" value="AL" /> Small (1,000-2,000 students)
+            <br /><input id="population" type="checkbox" value="AL" /> Medium (2,000-5,000 students)
+            <br /><input id="population" type="checkbox" value="AL" /> Large (5,000-10,000 students)
+            <br /><input id="population" type="checkbox" value="AL" /> Very Large (10,000+ students)
+          </div>
+          <div class="label">School Setting:</div>
+          <div class="searchcontainer" style="height: auto;">
+              <input id="population" type="checkbox" value="AL" /> Urban
+            <br /><input id="population" type="checkbox" value="AL" /> Suburban
+            <br /><input id="population" type="checkbox" value="AL" /> Rural
+          </div>
+        </div>
+
+        <div class="section" onclick="toggle('location')">Location</div>
+        <div id="location">
+          <div class="label">State(s):</div>
+          <div id="conState" class="searchcontainer">
+            <input id="state" type="checkbox" value="AL" /> Alabama
+            <br /><input id="state" type="checkbox" value="AK" /> Alaska
+            <br /><input id="state" type="checkbox" value="AK" /> Arkansas
+            <br /><input id="state" type="checkbox" value="CA" /> California
+            <br /><input id="state" type="checkbox" value="CO" /> Colorado
+            <br /><input id="state" type="checkbox" value="DE" /> Delaware
+            <br /><input id="state" type="checkbox" value="FL" /> Florida
+            <br /><input id="state" type="checkbox" value="GA" /> Georgia
+            <br /><input id="state" type="checkbox" value="HI" /> Hawaii
+            <br /><input id="state" type="checkbox" value="IL" /> Illinois
+            <br /><input id="state" type="checkbox" value="IN" /> Indiana
+            <br /><input id="state" type="checkbox" value="KS" /> Kansas
+            <br /><input id="state" type="checkbox" value="KY" /> Kentucky
+          </div> <div style="float:right" onclick="allToggle('conState')">Show all states</div>
+          <div class="label">Region(s):</div>
+          <div class="searchcontainer">
+            <input id="region" type="checkbox" value="AL" /> Northeast
+            <br /><input id="region" type="checkbox" value="AK" /> Mid-Atlantic
+            <br /><input id="region" type="checkbox" value="AK" /> Southeast
+            <br /><input id="region" type="checkbox" value="CA" /> Midwest
+            <br /><input id="region" type="checkbox" value="CO" /> Southwest
+            <br /><input id="region" type="checkbox" value="DE" /> Northwest
+            <br /><input id="region" type="checkbox" value="FL" /> Pacific
+          </div>
+        </div>
+        <div class="label">Designation(s):</div>
+        <div class="searchcontainer" style="height: auto;">
+          <input id="designation" type="checkbox" value="AL" /> Liberal Arts Colleges (LAC)
+          <br /><input id="designation" type="checkbox" value="AL" /> Annapolis Group of LAC
+          <br /><input id="designation" type="checkbox" value="AL" /> Women's Only Colleges 
+          <br /><input id="designation" type="checkbox" value="AL" /> HBCU
+          <br /><input id="designation" type="checkbox" value="AL" /> Ivy League Schools 
+          <br /><input id="designation" type="checkbox" value="AL" /> Public Ivies 
+          <br /><input id="designation" type="checkbox" value="AL" /> Schools with Honors Colleges/Programs 
+          <br /><input id="designation" type="checkbox" value="AL" /> State Flagship Schools 
+          <br /><input id="designation" type="checkbox" value="AL" /> CTCL (Colleges That Change Lives)
+          <br /><input id="designation" type="checkbox" value="AL" /> Stamps Scholarship Schools 
+          <br /><input id="designation" type="checkbox" value="AL" /> Questbridge Schools 
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8" style="clear:both;">
+
+      <div id="searchResults">
+
+      	<div v-for="m in matches" class="w3-card">
+			<div class="w3-container" style="padding:8px; margin-top: 0px;">
+				<!-- <img id="sb_image" v-bind:src="'/cfpimages/school/'+m.Image" width="200" /> -->
+				<template v-if="m.Icon != ''">
+					<img  id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
+				</template>
+				<template v-else>
+					<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
+			  	</template>
+			  	<div style="float:left; margin-left: 8px; margin-top: 4px;">
+				  	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
+				  	<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
+				</div>
+				<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
+					<h6 style="display:inline;">
+					Admit Rate: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}
+					<br />Yield: {{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }}
+					<br />Power Ranking: {{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr25 + m.satmt25 + m.satvr75 + m.satmt75) / 54).toFixed(0)+"%" }}
+					<br />SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
+					</h6>
+				</div>
+			</div>
+
+	     </div>
+
+
+        <!-- <table cellspacing="0" cellpadding="8" border="1" width="100%" id="tblSearchResults">
+          <thead>
+            <tr>
+              <th width="100%">School</th>
+              <th nowrap align="center">City</th>
+              <th nowrap align="center"># of Undergrads</th>
+              <th>SAT Range</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr v-for="m in matches">
+              <td><input type="checkbox" id="cbSchoolID" value="1" /> {{ m.ShortName }}</td>
+              <td nowrap>{{ m.City}}, {{ m.State }}</td>
+              <td align="center">{{ m.applcn }} : {{ m.admssn }} : {{ m.enrlt }}</td>
+              <td nowrap align="center">{{ m.satvr75 }} : {{ m.satmt75 }}</td>
+            </tr>
+          </tbody>
+        </table> -->
+        <!--div class="postcard">
+          Hello World
+          <br />Hello World
+          <br />Hello World
+        </div>
+        <div class="postcard">
+          Hello World
+          <br />Hello World
+          <br />Hello World
+        </div-->
+
+        <div id="errormsg"></div>
+
+      </div>
+
+    </div>
+
+  </div> <!-- /.row -->
+
+</div> <!-- /.container -->
+
+
+<!-- Footer -->
+<div id="footer"></div>
+
+
+</body>
+</html>
+
+
+<script>
+
+  search = vueSearch();
+
+</script>
