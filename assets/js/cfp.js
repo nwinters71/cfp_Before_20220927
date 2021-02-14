@@ -3,6 +3,9 @@ var GridData = "";
 var GridPos = 0;
 var schoolCount = 8;
 var loggedIn = false;
+var sideBarData = '';
+var sideBarType = "";
+var sideBarId = "";
 
 $(document).ready(function() {
 
@@ -60,11 +63,27 @@ $(document).ready(function() {
 
 
 function getRightSidebar() {
+	if (sideBarData == '') {
+		var params = {"action":"getSchools", "id":GridData.SCHOOLCODES};
+		console.log("getRightSidebar");
+		// console.log(params);
+		$.ajax({
+			url:"api/school.cfm", 
+			data: params,
+			dataType: "json",
+			success: function(data) {
+				sideBarData = data.getSchool;
+				// console.log("Data");
+				console.log(sideBarData[0]);
+			}
+		});		
+	}
 	$.ajax({
 		url:"rightsidebar.html", 
 		success: function(data) {
 			$("#rightsidebar").html(data);
-			document.getElementById("Admissions").style.display = "block";
+			setSideBar(sideBarData[0]);
+			// document.getElementById("Admissions").style.display = "block";
 		}
 	});
 }
@@ -73,63 +92,92 @@ function numberWithCommas(x) {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var getSchool_StillWaiting = false;
 
 function setSideBar(type, id) {
+
+
+	// console.log("Type/ID: " + sideBarType + "::" + sideBarId);
 
 	switch(type) {
 
 		case "school":
-			let params = {};
-			params.url = "api/school.cfm?id=" + id;
-			params.dataType = "json";
 
-			let tmp = $.ajax(params)
-				.done(function(data) {
-					data = data[0];
+		if (!getSchool_StillWaiting) {
 
-					if (data.image.length > 0) {
-						$("#sb_image").attr("src", "/cfpimages/school/images/" + data.image);
-						$("#sb_image").css("display", "block");
-					} else {
-						$("#sb_image").attr("src", "");
-						$("#sb_image").css("display", "none");
+			getSchool_StillWaiting = true;
+
+			setTimeout(function () {
+				let params = {};
+				params.url = "api/school.cfm?id=" + id;
+				params.dataType = "json";
+
+				// console.log(sideBarData);
+				for (x in sideBarData) {
+					data = sideBarData[x];
+					// console.log(data);
+					if (data.schoolCode == id) {
+						// console.log("Get school info");
+						// console.log(data.schoolCode + " :: " + id);
+						// $.ajax(params)
+							// .done(function(data) {
+								// console.log("data");
+								// console.log(data);
+								// console.log(data);
+								// data = data.getSchool[0];
+								// console.log("~~~~~~~~~~~~~");
+								// console.log(data);
+
+								if (data.image.length > 0) {
+									$("#sb_image").attr("src", "/cfpimages/school/images/" + data.image);
+									$("#sb_image").css("display", "block");
+								} else {
+									$("#sb_image").attr("src", "");
+									$("#sb_image").css("display", "none");
+								}
+								$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
+
+								$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
+								$("#sb_schoolname").html(data.shortname);
+								$("#sb_phone").html(data.phone);
+
+								if(data.address1.length > 0) {
+									$("#sb_address_line1").html(data.address1 + "<br />");
+								}
+								$("#sb_address_line2").html(data.city + ", " + data.state + " &nbsp;" + data.zip);
+								$("#sb_map").html('<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(data.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>');
+
+								$("#sb_address_line1").html(data.address1);
+								$("#applcn").html(numberWithCommas(data.applcn));
+								$("#applcnm").html(numberWithCommas(data.applcnm));
+								$("#applcnw").html(numberWithCommas(data.applcnw));
+								$("#admssn").html(numberWithCommas(data.admssn));
+								$("#admssnm").html(numberWithCommas(data.admssnm));
+								$("#admssnw").html(numberWithCommas(data.admssnw));
+								$("#enrlt").html(numberWithCommas(data.enrlt));
+								$("#enrlm").html(numberWithCommas(data.enrlm));
+								$("#enrlw").html(numberWithCommas(data.enrlw));
+								$("#enrlft").html(numberWithCommas(data.enrlft));
+								$("#satmt25").html(data.satmt25);
+								$("#satmt75").html(data.satmt75);
+								$("#satvr25").html(data.satvr25);
+								$("#satvr75").html(data.satvr75);
+								$("#actcm25").html(data.actcm25);
+								$("#actcm75").html(data.actcm75);
+								$("#actmt25").html(data.actmt25);
+								$("#actmt75").html(data.actmt75);
+								$("#acten25").html(data.acten25);
+								$("#acten75").html(data.acten75);
+							
+								getSchool_StillWaiting = false;
+							// });
 					}
-					$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
+				}
+			}, 100);
+		}
 
-					$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
-					$("#sb_schoolname").html(data.shortname);
-					$("#sb_phone").html(data.phone);
+		break;
 
-					if(data.address1.length > 0) {
-						$("#sb_address_line1").html(data.address1 + "<br />");
-					}
-					$("#sb_address_line2").html(data.city + ", " + data.state + " &nbsp;" + data.zip);
-					$("#sb_map").html('<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(data.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>');
-
-					$("#sb_address_line1").html(data.address1);
-					$("#applcn").html(numberWithCommas(data.applcn));
-					$("#applcnm").html(numberWithCommas(data.applcnm));
-					$("#applcnw").html(numberWithCommas(data.applcnw));
-					$("#admssn").html(numberWithCommas(data.admssn));
-					$("#admssnm").html(numberWithCommas(data.admssnm));
-					$("#admssnw").html(numberWithCommas(data.admssnw));
-					$("#enrlt").html(numberWithCommas(data.enrlt));
-					$("#enrlm").html(numberWithCommas(data.enrlm));
-					$("#enrlw").html(numberWithCommas(data.enrlw));
-					$("#enrlft").html(numberWithCommas(data.enrlft));
-					$("#satmt25").html(data.satmt25);
-					$("#satmt75").html(data.satmt75);
-					$("#satvr25").html(data.satvr25);
-					$("#satvr75").html(data.satvr75);
-					$("#actcm25").html(data.actcm25);
-					$("#actcm75").html(data.actcm75);
-					$("#actmt25").html(data.actmt25);
-					$("#actmt75").html(data.actmt75);
-					$("#acten25").html(data.acten25);
-					$("#acten75").html(data.acten75);
-				});
-			break;
-		
 		default:
 			break;
 		
@@ -169,10 +217,18 @@ function setGridBehaviors() {
 
 		renderGrid(GridPos);
 
-		setTimeout(function() {
-			getRightSidebar();
-			setSideBar('school', GridData.SCHOOLS.DATA[GridPos][2]); // initiate sidebar to first school in dataset;
-		}, 1000);
+//		setTimeout(function() {
+//			getRightSidebar();
+
+			// setSideBar('school', GridData.SCHOOLS.DATA[GridPos][2]); // initiate sidebar to first school in dataset;
+
+			// console.log("Initial set sideBarType and sideBarId");
+		sideBarType = "school";
+		sideBarId = GridData.SCHOOLS.DATA[GridPos][2];
+		setSideBar(sideBarType, sideBarId);
+
+
+//		}, 1000);
 	});
 
 
@@ -198,11 +254,19 @@ function setGridBehaviors() {
 		let vLink = "go.cfm?l=" + $(this).parent().attr("value") + '&s=' + $(this).attr("value");
 		window.open(vLink);
 	});
+	$('.header-content').on("click", function() {
+		sideBarType = "school";
+		sideBarId = $('img', this).attr("schoolid");
+		setSideBar(sideBarType, sideBarId);
+	});
 	$('.header-content').on("mouseover", function() {
 		var schoolid = $('img', this).attr("schoolid");
 		setSideBar("school", schoolid);
 	});
-
+	$('.header-content').on("mouseout", function() {
+		// console.log("header-content :: mouseout")
+		setSideBar(sideBarType, sideBarId);
+	});
 
 	// EXPAND/COLLAPSE SITE SUBLINKS
 	$('.sectionExpand').on("click", function() {
@@ -223,6 +287,7 @@ function setGridBehaviors() {
 
 
 function renderGrid(schoolStart) {
+	let start = new Date().getTime();
 	let headerOutput = "";
 	let gridOutput = "";
 	let browseOutput = "";
@@ -252,7 +317,7 @@ function renderGrid(schoolStart) {
 	// 0-LinkCode, 1-ParentCode, 2-SiteName, 3-SiteCode, 4-SiteIcon, 5-LinkTitle, 6-HasSubLinks
 	if (1 == 1) {
 		var firstPass = "firstTime";
-		for (let link of GridData["SITES"]["DATA"]) {        
+		for (let link of GridData["SITES"]["DATA"]) {
 			if (firstPass == "firstTime") {
 				firstPass = "firstRow";
 			} else {
@@ -302,6 +367,9 @@ function renderGrid(schoolStart) {
 	$("#idWidget2").append(headerOutput).after(gridOutput);
 
 	setGridBehaviors();
+	
+	var elapsed = new Date().getTime() - start;
+	console.log("Elapsed time: " + elapsed);
 
 }
 

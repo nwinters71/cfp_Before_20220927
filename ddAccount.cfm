@@ -1,3 +1,7 @@
+<a id="signout" href="#" class="w3-bar-item">Sign Out</a>
+
+<cfabort>
+
 <script>
 $("#signout").on("click", function() {
 

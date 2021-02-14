@@ -1,0 +1,50 @@
+<html>
+<head>
+<style>
+body {
+  padding: 1em;
+  font-family: sans-serif;
+}
+
+.my-grid {
+  display: grid;
+  grid-template-columns: 2rem 100px 10rem;
+  background-color: #eee
+}
+
+.my-grid>* {
+  border: 1px solid #ccc;
+}
+
+.section-title {
+  grid-row: 1 / span 5;
+  text-align: center;
+  writing-mode:vertical-rl; /* vertical text */
+  /*line-height:2rem;  center in div */
+  transform:rotate(180deg); /* spin to orient as required */
+  background-color: papayawhip;
+  text-transform: uppercase;
+}
+
+input {
+  border: 2px solid #000;
+}
+</style>
+</head>
+
+<body>
+<div class="my-grid">
+  <div class="section-title"><img src="http://localhost:8888/cfpimages/schools/icons/batch/Harvard.png"> Harvard University</div>
+  <div>Address 1</div>
+  <input type="text">
+  <div>Address 2</div>
+  <input type="text">
+  <div>City</div>
+  <input type="text">
+  <div>State</div>
+  <input type="text">
+  <div>Zip Code</div>
+  <input type="text">
+</div>
+</body>
+</html>

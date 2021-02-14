@@ -3,10 +3,15 @@
 <cfdump var="#application#"><cfabort>
  --->
 
+<!--- <cfoutput>#url.id#</cfoutput><cfabort> --->
+
 <cfparam name="url.id" default="j8kvs" />
 
-<cfquery name="getSChool" datasource="CFP">
-	select 	h.UNITID, h.INSTNM
+<cfset resp = {} />
+<cfset resp.status = "FAIL" />
+
+<cfquery name="resp.getSchool" datasource="CFP">
+	select 	s.schoolCode, h.UNITID, h.INSTNM
 		-- Admission fields
 			, a.satvr25, a.satvr75, a.satmt25, a.satmt75, a.acten25, a.acten75, a.actmt25, a.actmt75, a.actcm25, a.actcm75, a.satnum, a.satpct, a.actnum, a.actpct
 			, a.admcon1 cons_hsrank
@@ -24,10 +29,23 @@
 	from 	ipeds.hd2017 h 
 			left join ipeds.adm2017 a on h.UNITID = a.UNITID
 			join cfp.tblschool s on h.UNITID = s.UnitID
-	where  s.SchoolCode = <cfqueryparam cfsqltype="cf_sql_varchar" maxlength="5" value="#url.id#" />
+	where  s.SchoolCode IN (#preserveSingleQuotes(url.id)#)
 </cfquery>
+	<!--- where  s.SchoolCode = <cfqueryparam cfsqltype="cf_sql_varchar" maxlength="5" value="#url.id#" /> --->
 
+<!--- <cfquery name="resp.getMajors" datasource="CFP">
+	select  -- s.UnitID, s.INSTNM shortname, 
+	 		cip.CIPCode, cip.CIPTitle, c.MAJORNUM, c.ctotalt, c.ctotalm, c.CTOTALW -- , c.ctotalm/c.ctotalt pm, c.ctotalw/c.ctotalt pw
+	from 	ipeds.c2019a c 
+			right join ipeds.cipcode2010 cip on c.CIPCODE = cip.CIPCode 
+	where 	c.UnitID = <cfqueryparam cfsqltype="cf_sql_varchar" value="#resp.getSchool.UnitID#" />
+	-- and 	c.MAJORNUM = 1
+	 and 	c.AWLEVEL = 5
+	order	by ctotalt desc -- PercentWomen desc, s.INSTNM
+</cfquery> --->
 
-<cfcontent reset="true"><cfoutput>#serializeJSON(getSchool, "struct")#</cfoutput><cfabort>
+<cfset resp.status = "SUCCESS" />
+
+<cfcontent reset="true"><cfoutput>#serializeJSON(resp, "struct")#</cfoutput><cfabort>
 
 

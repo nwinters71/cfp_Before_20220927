@@ -64,7 +64,7 @@
 
         <div class="label"><strong>School Name:</strong></div>
         <div>
-          <input class="searchInput" id="keyword" type="text" size="14" v-model="keyword" @keypress="getSchools" />
+          <input class="searchInput" id="keyword" type="text" size="14" v-model="keyword" v-on:keyup="getSchools" />
           <button onclick="doSearch()">Search</button>
         </div>
 
@@ -197,10 +197,10 @@
 				</div>
 				<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
 					<h6 style="display:inline;">
-					Admit Rate: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}
+					SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
+					<br />Admit Rate: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}
 					<br />Yield: {{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }}
-					<br />Power Ranking: {{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr25 + m.satmt25 + m.satvr75 + m.satmt75) / 54).toFixed(0)+"%" }}
-					<br />SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
+					<br /><b>CFP Power Ranking: <span class="w3-tag w3-blue">{{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr75 + m.satmt75) / 28).toFixed(0)+"%" }}</span></b>
 					</h6>
 				</div>
 			</div>

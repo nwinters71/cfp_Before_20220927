@@ -96,6 +96,7 @@
 <cfelse>
   <cfset resp = {} />
   <cfset resp.schools = getSchools />
+  <cfset resp.schoolcodes = quotedvalueList(getSchools.SchoolCode) />
   <cfset resp.sites = getLinks />
   <cfset resp.missingslugs = missing />
   <cfcontent reset="true" type="text/plain"><cfoutput>#serializeJSON(resp)#</cfoutput><cfabort />

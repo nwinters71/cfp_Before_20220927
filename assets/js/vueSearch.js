@@ -7,7 +7,7 @@ function vueSearch() {
 			// 	ProfileType: "Profiles",
 			// 	ProfileActive: "Active",
 			// },
-			keyword: "Da",
+			keyword: "",
 			matches: [],
 			stillWaiting: false,
 		},
@@ -16,10 +16,9 @@ function vueSearch() {
 		},
 		methods: {
 			getSchools: function () {
-				console.log(this.stillWaiting);
-				console.log(this.keyword);
+				// console.log(this.stillWaiting);
 				if (!Search.stillWaiting) {
-					// console.log("searching");
+					console.log("Keyword: " + this.keyword);
 					Search.stillWaiting = true;
 					setTimeout(function () {
 						var params = {"action":"getSchools", "keyword":Search.keyword};
@@ -35,7 +34,7 @@ function vueSearch() {
 							Search.matches = data;
 							Search.stillWaiting = false;
 						});
-					}, 200);
+					}, 300);
 				}
 			},			
 

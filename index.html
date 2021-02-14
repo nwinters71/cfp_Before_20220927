@@ -8,25 +8,25 @@
   <link rel="shortcut icon" type="image/ico"  href="/cfpimages/golden-ticket.png" />
   <title>College Fast Pass</title>
 
+  <!-- Vendor -->
   <script src="./assets/vendor/jquery/jquery.min.js" language="JavaScript" type="text/javascript"></script>
-  <!-- <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js" language="JavaScript" type="text/javascript"></script> -->
-  <script src="./assets/js/cfp.js" language="JavaScript" type="text/javascript"></script>
-  
-  <!-- <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-  <link rel="stylesheet" type="text/css" href="./assets/css/cfp.css">
   <link rel="stylesheet" href="assets/vendor/w3schools/w3.css">
+
+  <!-- CFP -->
+  <script src="./assets/js/cfp.js" language="JavaScript" type="text/javascript"></script>  
+  <link rel="stylesheet" type="text/css" href="./assets/css/cfp.css">
 </head>
 
 
 <body>
 
-	<!-- Navigation -->
-	<div id="nav"></div>
+<!-- Navigation -->
+<div id="nav"></div>
 
-	<!-- Page Content -->
-
+<!-- Page Content -->
 <div class="grid-container">
 	<div class="grid-item"></div>
+
 	<!-- Portfolio Item Row -->
 	<div id="thegrid" class="grid-item">
 		<div>
@@ -37,22 +37,28 @@
 			</div>
 		</div>
 	</div> <!-- / #thegrid -->
+
 	<div class="grid-item"></div>
+
 	<div id="rightsidebar" class="grid-item w3-card"></div>        
+
 	<div class="grid-item"></div>
 
 </div> <!-- /.grid-container -->
 
-	<!-- Footer -->
-	<div id="footer" style="text-align: center"></div>
+<!-- Footer -->
+<div id="footer" style="text-align: center"></div>
 
 </body>
 
 <script>
 	setTimeout(function(){
+		console.log("Initial set sideBarType and sideBarId");
 		getRightSidebar();
-		setSideBar('school', GridData.SCHOOLS.DATA[0][2]); // initiate sidebar to first school in dataset;
-	}, 400);
+		sideBarType = "school";
+		sideBarId = GridData.SCHOOLS.DATA[0][2]
+		setSideBar(sideBarType, sideBarId); // initiate sidebar to first school in dataset;
+	}, 500);
 </script>
 
 </html>

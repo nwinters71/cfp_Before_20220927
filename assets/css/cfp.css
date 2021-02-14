@@ -11,7 +11,10 @@ body {
   margin:auto;
 }
 
-* {box-sizing: border-box;}
+* {
+	box-sizing: border-box;
+	text-decoration: none;
+}
 
 #rightsidebar {  
     height: 100%; /* Full-height: remove this if you want "auto" height */
