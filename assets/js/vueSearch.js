@@ -9,6 +9,7 @@ function vueSearch() {
 			// },
 			keyword: "",
 			matches: [],
+			mySchools: [],
 			stillWaiting: false,
 		},
 
@@ -17,6 +18,7 @@ function vueSearch() {
 		methods: {
 			getSchools: function () {
 				// console.log(this.stillWaiting);
+				openTab("SearchResults");
 				if (!Search.stillWaiting) {
 					console.log("Keyword: " + this.keyword);
 					Search.stillWaiting = true;
@@ -49,13 +51,14 @@ function vueSearch() {
 				.done(function(data) {
 					console.log("myschools: ");
 					console.log(data);
-					Search.matches = data;
+					Search.mySchools = data;
 				});
 			},			
 		},
 
 		mounted: function() {
 			console.log('vueSearch component has been Mounted!');
+			this.getMySchools();
 			// store.dispatch('init');
 			// this.getTables();
 		}

@@ -6,7 +6,6 @@ var loggedIn = false;
 var sideBarData = '';
 var sideBarType = "";
 var sideBarId = "";
-var rsbSchoolID = "";
 
 $(document).ready(function() {
 
@@ -37,7 +36,7 @@ $(document).ready(function() {
 			// $(".SchoolName").css("display", "inline");              // school name disappears without this line
 			// $(".widget2").css("height", (300 - scrollPos) + "px");
 			$("#idWidget2").css("height", (300 - scrollPos) + "px");
-			$(".firstRow").css("margin-top", (scrollPos + 58) + "px");  // + 58 sets the position of the firstrow so that it isn't hidden or a gap between it and the headers
+//			$(".firstRow").css("margin-top", (scrollPos + 58) + "px");  // + 58 sets the position of the firstrow so that it isn't hidden or a gap between it and the headers
 		} else {
 			// $(".widget2").css("height", "52px");                    // 52px is minimum height to show just school icon
 			$("#idWidget2").css("height", "52px");                    // 52px is minimum height to show just school icon			
@@ -85,11 +84,10 @@ function getRightSidebar() {
 		});		
 	}
 	$.ajax({
-		url:"rsb.html", 
+		url:"rightsidebar.html", 
 		success: function(data) {
-			$("#rsb").html(data);
+			$("#rightsidebar").html(data);
 			setSideBar(sideBarData[0]);
-			openTab(event, 'Admissions');
 			// document.getElementById("Admissions").style.display = "block";
 		}
 	});
@@ -101,7 +99,10 @@ function numberWithCommas(x) {
 
 var getSchool_StillWaiting = false;
 
-function setSideBar(type, sid) {
+function setSideBar(type, id) {
+
+
+	// console.log("Type/ID: " + sideBarType + "::" + sideBarId);
 
 	switch(type) {
 
@@ -113,54 +114,67 @@ function setSideBar(type, sid) {
 
 			setTimeout(function () {
 				let params = {};
-				params.url = "api/school.cfm?id=" + sid;
+				params.url = "api/school.cfm?id=" + id;
 				params.dataType = "json";
 
+				// console.log(sideBarData);
 				for (x in sideBarData) {
 					data = sideBarData[x];
-					if (data.schoolCode == sid) {
-						if (data.image.length > 0) {
-							$("#sb_image").attr("src", "/cfpimages/school/images/" + data.image);
-							$("#sb_image").css("display", "block");
-						} else {
-							$("#sb_image").attr("src", "");
-							$("#sb_image").css("display", "none");
-						}
-						$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
+					// console.log(data);
+					if (data.schoolCode == id) {
+						// console.log("Get school info");
+						// console.log(data.schoolCode + " :: " + id);
+						// $.ajax(params)
+							// .done(function(data) {
+								// console.log("data");
+								// console.log(data);
+								// console.log(data);
+								// data = data.getSchool[0];
+								// console.log("~~~~~~~~~~~~~");
+								// console.log(data);
 
-						$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
-						$("#sb_schoolname").html(data.shortname);
-						$("#sb_phone").html(data.phone);
+								if (data.image.length > 0) {
+									$("#sb_image").attr("src", "/cfpimages/school/images/" + data.image);
+									$("#sb_image").css("display", "block");
+								} else {
+									$("#sb_image").attr("src", "");
+									$("#sb_image").css("display", "none");
+								}
+								$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
 
-						if(data.address1.length > 0) {
-							$("#sb_address_line1").html(data.address1 + "<br />");
-						}
-						$("#sb_address_line2").html(data.city + ", " + data.state + " &nbsp;" + data.zip);
-						$("#sb_map").html('<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(data.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>');
+								$("#sb_icon").attr("src", "/cfpimages/schools/icons/batch/" + data.icon.replace("jpg", "png"));
+								$("#sb_schoolname").html(data.shortname);
+								$("#sb_phone").html(data.phone);
 
-						$("#sb_address_line1").html(data.address1);
-						$("#applcn").html(numberWithCommas(data.applcn));
-						$("#applcnm").html(numberWithCommas(data.applcnm));
-						$("#applcnw").html(numberWithCommas(data.applcnw));
-						$("#admssn").html(numberWithCommas(data.admssn));
-						$("#admssnm").html(numberWithCommas(data.admssnm));
-						$("#admssnw").html(numberWithCommas(data.admssnw));
-						$("#enrlt").html(numberWithCommas(data.enrlt));
-						$("#enrlm").html(numberWithCommas(data.enrlm));
-						$("#enrlw").html(numberWithCommas(data.enrlw));
-						$("#enrlft").html(numberWithCommas(data.enrlft));
-						$("#satmt25").html(data.satmt25);
-						$("#satmt75").html(data.satmt75);
-						$("#satvr25").html(data.satvr25);
-						$("#satvr75").html(data.satvr75);
-						$("#actcm25").html(data.actcm25);
-						$("#actcm75").html(data.actcm75);
-						$("#actmt25").html(data.actmt25);
-						$("#actmt75").html(data.actmt75);
-						$("#acten25").html(data.acten25);
-						$("#acten75").html(data.acten75);
-					
-						getSchool_StillWaiting = false;
+								if(data.address1.length > 0) {
+									$("#sb_address_line1").html(data.address1 + "<br />");
+								}
+								$("#sb_address_line2").html(data.city + ", " + data.state + " &nbsp;" + data.zip);
+								$("#sb_map").html('<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(data.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>');
+
+								$("#sb_address_line1").html(data.address1);
+								$("#applcn").html(numberWithCommas(data.applcn));
+								$("#applcnm").html(numberWithCommas(data.applcnm));
+								$("#applcnw").html(numberWithCommas(data.applcnw));
+								$("#admssn").html(numberWithCommas(data.admssn));
+								$("#admssnm").html(numberWithCommas(data.admssnm));
+								$("#admssnw").html(numberWithCommas(data.admssnw));
+								$("#enrlt").html(numberWithCommas(data.enrlt));
+								$("#enrlm").html(numberWithCommas(data.enrlm));
+								$("#enrlw").html(numberWithCommas(data.enrlw));
+								$("#enrlft").html(numberWithCommas(data.enrlft));
+								$("#satmt25").html(data.satmt25);
+								$("#satmt75").html(data.satmt75);
+								$("#satvr25").html(data.satvr25);
+								$("#satvr75").html(data.satvr75);
+								$("#actcm25").html(data.actcm25);
+								$("#actcm75").html(data.actcm75);
+								$("#actmt25").html(data.actmt25);
+								$("#actmt75").html(data.actmt75);
+								$("#acten25").html(data.acten25);
+								$("#acten75").html(data.acten75);
+							
+								getSchool_StillWaiting = false;
 							// });
 					}
 				}
@@ -245,20 +259,17 @@ function setGridBehaviors() {
 		let vLink = "go.cfm?l=" + $(this).parent().attr("value") + '&s=' + $(this).attr("value");
 		window.open(vLink);
 	});
-	$('.GridHeader').on("click", function() {
+	$('.header-content').on("click", function() {
 		sideBarType = "school";
 		sideBarId = $('img', this).attr("schoolid");
 		setSideBar(sideBarType, sideBarId);
 	});
-	$('.GridHeader').on("mouseover", function() {
-		let schoolid = $('img', this).attr("schoolid");
-		if (rsbSchoolID != schoolid) {
-			rsbSchoolID = schoolid;
-			setSideBar("school", schoolid);
-		}
+	$('.header-content').on("mouseover", function() {
+		var schoolid = $('img', this).attr("schoolid");
+		setSideBar("school", schoolid);
 	});
-	$('#idWidget2').on("mouseleave", function() {
-		console.log("idWidget2 :: mouseleave")
+	$('.header-content').on("mouseout", function() {
+		// console.log("header-content :: mouseout")
 		setSideBar(sideBarType, sideBarId);
 	});
 
@@ -279,16 +290,6 @@ function setGridBehaviors() {
 
 }
 
-// function drag(ev) {
-// 	console.log(ev.target.id);
-//   ev.dataTransfer.setData("text", ev.target.id);
-// }
-// function drugged(ev) {
-// 	console.log(ev.target.id);
-// 	ev.preventDefault();
-// 	var data = ev.dataTransfer.getData("text");
-// 	// console.log(data);
-// }
 
 function renderGrid(schoolStart) {
 	let start = new Date().getTime();
@@ -331,7 +332,6 @@ function renderGrid(schoolStart) {
 				if (link[4] == "") {
 					// Expander   
 					if (link[9] > 0) {
-						// gridOutput += ' <div ondragstart="drag(event)" ondragover="drugged(event)" draggable="true" id="Row' + link[3] + '" value="' + link[3] + '" class="GridRow ' + firstPass + '"><div class="GridCell"> <p> <img id="expand_subrow' + link[3] + '" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" /><img id="collapse_subrow' + link[3] + '" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" /> &nbsp; ';
 						gridOutput += ' <div id="Row' + link[3] + '" value="' + link[3] + '" class="GridRow ' + firstPass + '"><div class="GridCell"> <p> <img id="expand_subrow' + link[3] + '" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" /><img id="collapse_subrow' + link[3] + '" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" /> &nbsp; ';
 					} else {
 						// No Sublinks
@@ -369,7 +369,7 @@ function renderGrid(schoolStart) {
 
 	$("#thegrid").html(origGrid);
 	$(".blankrow").after(browseOutput);
-	$("#idWidget2").append(headerOutput).after(gridOutput);
+//	$("#idWidget2").append(headerOutput).after(gridOutput);
 
 	setGridBehaviors();
 	

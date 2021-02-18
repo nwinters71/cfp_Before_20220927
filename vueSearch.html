@@ -39,6 +39,36 @@
 		search.keyword = 'Alabama';
 		search.getSchools();
 	}
+
+	function openTab(tabName) {
+		console.log("OpeningTab " + tabName);
+		$(".tabcontent").css("display", "none");
+		$("#content" + tabName).css("display", "block");
+		$(".tablink").removeClass("w3-blue");
+		$("#tab" + tabName).addClass("w3-blue");
+	}
+
+		// Declare all variables
+		// var i, tabcontent, tablinks;
+
+		// Get all elements with class="tabcontent" and hide them
+		// tabcontent = document.getElementsByClassName("tabcontent");
+		// for (i = 0; i < tabcontent.length; i++) {
+		// 	tabcontent[i].style.display = "none";
+		// }
+
+		// $("#tab" + tabName").css("display", "block");
+
+		// Get all elements with class="tablinks" and remove the class "active"
+		// tablinks = document.getElementsByClassName("tablink");
+		// for (i = 0; i < tablinks.length; i++) {
+		// 	tablinks[i].className = tablinks[i].className.replace(" w3-yellow", "");
+		// }
+
+		// Show the current tab, and add an "active" class to the button that opened the tab
+		// document.getElementById(cityName).style.display = "block";
+		// evt.currentTarget.className += " w3-yellow";
+
 </script>
 
 </head>
@@ -59,8 +89,8 @@
       
       <div id="searchOptions">
 
-        <button @click="getMySchools();">My Schools</button>
-        <button onclick="test()">Test</button>
+        <!-- <button @click="getMySchools();">My Schools</button>
+        <button onclick="test()">Test</button> -->
 
         <div class="label"><strong>School Name:</strong></div>
         <div>
@@ -178,35 +208,66 @@
       </div>
     </div>
 
-    <div class="col-md-8" style="clear:both;">
 
-      <div id="searchResults">
 
-      	<div v-for="m in matches" class="w3-card">
-			<div class="w3-container" style="padding:8px; margin-top: 0px;">
-				<!-- <img id="sb_image" v-bind:src="'/cfpimages/school/'+m.Image" width="200" /> -->
-				<template v-if="m.Icon != ''">
-					<img  id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
-				</template>
-				<template v-else>
-					<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
-			  	</template>
-			  	<div style="float:left; margin-left: 8px; margin-top: 4px;">
-				  	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
-				  	<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
-				</div>
-				<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
-					<h6 style="display:inline;">
-					SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
-					<br />Admit Rate: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}
-					<br />Yield: {{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }}
-					<br /><b>CFP Power Ranking: <span class="w3-tag w3-blue">{{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr75 + m.satmt75) / 28).toFixed(0)+"%" }}</span></b>
-					</h6>
+    <div class="col-md-8" style="clear:both;" />
+
+    <div class="w3-container" style="margin-top:100px">
+
+		<div class="w3-bar w3-gray" style="position:sticky; top:60px; z-index:10; padding: 0">
+			<button id="tabMySchools" class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab('MySchools')">My Schools</button>
+			<button id="tabSearchResults" class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab('SearchResults')">Search Results</button>
+			<!-- <button class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab(event, 'Info')">Info</button> -->
+		</div>
+
+		<div id="contentMySchools" class="tabcontent w3-container" style="padding: 0">
+			<div v-for="m in mySchools" class="w3-card">
+				<div class="w3-container" style="padding:8px; margin-top: 0px;">
+					<template v-if="m.Icon != ''">
+						<img  id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
+					</template>
+					<template v-else>
+						<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
+				  	</template>
+				  	<div style="float:left; margin-left: 8px; margin-top: 4px;">
+					  	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
+					  	<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
+					</div>
+					<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
+						<h6 style="display:inline;">
+						SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
+						<br />Admit/Yield: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}/{{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }}
+						<!-- <br />Yield Rate: {{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }} -->
+						<br /><b>CFP Power Ranking: <span class="w3-tag w3-blue">{{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr75 + m.satmt75) / 28).toFixed(0)+"%" }}</span></b>
+						</h6>
+					</div>
 				</div>
 			</div>
-
-	     </div>
-
+		</div>
+		<div id="contentSearchResults" class="tabcontent w3-container" style="padding:0">
+			<div v-for="m in matches" class="w3-card">
+				<div class="w3-container" style="padding:8px; margin-top: 0px;">
+					<template v-if="m.Icon != ''">
+						<img  id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
+					</template>
+					<template v-else>
+						<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
+				  	</template>
+				  	<div style="float:left; margin-left: 8px; margin-top: 4px;">
+					  	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
+					  	<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
+					</div>
+					<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
+						<h6 style="display:inline;">
+						SAT Range: {{ m.satvr25 + m.satmt25 }}-{{ m.satvr75 + m.satmt75 }}
+						<br />Admit/Yield: {{ parseFloat(m.admssn / m.applcn * 100).toFixed(0)+"%" }}/{{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }}
+						<!-- <br />Yield Rate: {{ parseFloat(m.enrlt / m.admssn * 100).toFixed(0)+"%" }} -->
+						<br /><b>CFP Power Ranking: <span class="w3-tag w3-blue">{{ parseFloat((1-(m.admssn / m.applcn) + (m.enrlt / m.admssn)) * (m.satvr75 + m.satmt75) / 28).toFixed(0)+"%" }}</span></b>
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <!-- <table cellspacing="0" cellpadding="8" border="1" width="100%" id="tblSearchResults">
           <thead>
@@ -257,7 +318,6 @@
 
 
 <script>
-
   search = vueSearch();
-
+  openTab("MySchools");
 </script>

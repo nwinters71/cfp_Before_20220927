@@ -24,11 +24,12 @@ body {
     /*position: sticky; */
     /* Stay at the top */
     /*top: 80px; */
-    z-index: 1; /* Stay on top */
+    /* z-index: 1; */
     margin-left: auto;
     margin-right: auto;
-    margin-top: 70px;
+    margin-top: 58px;
     background-color: #eee; /* Black */
+    height: 1800px;
     /* overflow-x: hidden; Disable horizontal scroll */
     padding-top: 20px;
     border:thin solid #ccc;
@@ -215,6 +216,20 @@ p {
 .SchoolIcon:hover {
   border: yellow thick solid;
   cursor:pointer;  
+}
+
+
+
+.xblankrow {
+  z-index:900;
+  background-color:#FFF; 
+  width:300px; 
+  height:50px; 
+  /*position:fixed; */
+  left: 800px;
+  top:30px;
+  opacity: 1;
+  float:left;
 }
 
 
