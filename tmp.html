@@ -1,52 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<link rel="shortcut icon" type="image/ico"  href="/cfpimages/golden-ticket.png" />
-
-	<title>College Fast Pass</title>
-
-	<script src="./assets/vendor/jquery/jquery.min.js" language="JavaScript" type="text/javascript"></script>
-	<script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
-	<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
-
-	<script src="./assets/js/cfp.js" language="JavaScript" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="./assets/css/cfp.css">
-
-	<script src="./assets/js/datastore.js" language="JavaScript" type="text/javascript"></script>
-	<script src="./assets/js/vueSearch.js" language="JavaScript" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="./assets/css/search.css">
-
-	<link rel="stylesheet" href="assets/vendor/w3schools/w3.css">
-
-
-<style>
-	.grid-container {
-		width: 100%;
-		/*border: thin red solid;*/
-		display: grid;
-		/*grid-template-columns: 1fr 330px 1fr;*/
-		grid-template-columns: 1fr 330px 40px 700px 1fr;
-		align-items: top;
-	}
-</style>
-
-</head>
-
-<body>
-
-
-<!-- Navigation -->
-<div id="nav"></div>
-
 <!-- Page Content -->
+<div id="vueSearch" class="grid-container">
 
-	<div id="vueSearch" class="grid-container">
+	<!-- Portfolio Item Row -->
+	<div class="grid-container">
 
+		<!-- <div id="leftsidenav" class="col-md-4"> -->
 		<div class="griditem"></div>
 
 		<div id="searchOptions" class="griditem">
@@ -54,7 +12,7 @@
 			<div class="label"><strong>School Name:</strong></div>
 			<div>
 				<input class="searchInput" id="keyword" type="text" size="14" v-model="keyword" v-on:keyup="getSchools" />
-				<button @click="test">Search</button>
+				<button onclick="doSearch()">Search</button>
 			</div>
 
 			<div class="section" onclick="toggle('admissions')">Admissions Criteria</div>
@@ -71,8 +29,8 @@
 					<span style="float:left; width: 140px"><input id="population" type="checkbox" value="AL" /> 80%+</span>
 				</div>
 
-				<!-- <div class="label">Test Scores:</div> -->
-				<!-- <div class="searchcontainer" style="height:auto"> -->
+				<div class="label">Test Scores:</div>
+					<!-- <div class="searchcontainer" style="height:auto"> -->
 					<!-- <div class="label">SAT</div>
 					<table border="0" cellspacing="0" cellpadding="8" width="100%">
 						<tr valign="top">
@@ -92,15 +50,15 @@
 						</tr>
 					</table>
 					<div class="label">ACT</div>
-						<table border="0" cellspacing="0" cellpadding="8" width="100%">
-							<tr valign="top">
-								<td width="110px"><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderACTcomp" /> Composite:</div><div id="amount" /></div></td>
-								<td width="100%" align="center"><div id="sliderACTcomp" class="ui-state-disabled"></div>
-								<div style="margin-top:4px;"><input type="input" id="actcomp" class="sliderText" /></div></td>
-							</tr>
-						</table> -->
+					<table border="0" cellspacing="0" cellpadding="8" width="100%">
+						<tr valign="top">
+							<td width="110px"><div class="label" style="margin: -4px 0px 0px -5px;"><input class="testscores" type="radio" value="sliderACTcomp" /> Composite:</div><div id="amount" /></div></td>
+							<td width="100%" align="center"><div id="sliderACTcomp" class="ui-state-disabled"></div>
+							<div style="margin-top:4px;"><input type="input" id="actcomp" class="sliderText" /></div></td>
+						</tr>
+					</table> -->
 					<!-- </div> -->
-				<!-- </div> -->
+				</div>
 
 
 				<div class="section" onclick="toggle('community')">Community</div>
@@ -158,38 +116,33 @@
 					<br /><input id="designation" type="checkbox" value="AL" /> Questbridge Schools 
 				</div>
 			</div>
-		</div>
 
+		</div>
 
 		<div class="griditem"></div>
 
-		<!-- <div class="griditem" style="clear:both;" /> -->
 
-		<div class="griditem" style="margin-top:80px;">
+	    <!-- <div class="griditem" style="clear:both;" /> -->
 
+		<div class="griditem w3-container" style="margin-top:100px">
 
-<!-- TABS -->
-			<div class="w3-bar w3-white" style="position:sticky; top:60px; z-index:10; padding: 0">
-				<button id="tabMySchools" tabclass="search" class="tablink w3-bar-item w3-button" style="margin-left: 0px">My Schools</button>
-				<button id="tabSearchResults" tabclass="search" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Search Results</button>
-				<!-- {{ mySchoolCodes }} -->
+			<div class="w3-bar w3-gray" style="position:sticky; top:60px; z-index:10; padding: 0">
+				<button id="tabMySchools" class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab('MySchools')">My Schools</button>
+				<button id="tabSearchResults" class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab('SearchResults')">Search Results</button>
+				<!-- <button class="tablink w3-bar-item w3-button" style="margin-left: 0px" onclick="openTab(event, 'Info')">Info</button> -->
 			</div>
 
-
-<!-- MY SCHOOLS -->
-			<div id="contentMySchools" tabclass="search" class="tabcontent w3-container" style="padding: 0; width:100%; border: thin black solid;">
-				<div v-for="m in mySchoolList" class="w3-card">
+			<div id="contentMySchools" class="tabcontent w3-container" style="padding: 0; width:100%; border: thin black solid;">
+				<div v-for="m in mySchools" class="w3-card">
 					<div class="w3-container" style="padding:8px; margin-top: 0px;">
 						<template v-if="m.Icon != ''">
-							<img  class="sb_icon" @click="updateMySchoolList(m)" title="Click to remove from your school list" v-bind:src="m.Icon" height="54px" /> &nbsp;
+							<img  id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
 						</template>
 						<template v-else>
-							<img class="sb_icon" @click="updateMySchoolList()" title="Click to remove from your school list" src="/cfpimages/space.png" height="54px" /> &nbsp;
+							<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
 						</template>
 						<div style="float:left; margin-left: 8px; margin-top: 4px;">
-								<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">
-<input style="display:inline" type="checkbox" @click="updateMySchoolList(m)" v-model="mySchoolCodes" v-bind:value="m.SchoolCode">
-								{{ m.FullName }}</h4>
+								<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
 								<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
 						</div>
 						<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
@@ -203,24 +156,18 @@
 					</div>
 				</div>
 			</div>
-
-
-<!-- SEARCH RESULTS -->
-			<div id="contentSearchResults" tabclass="search" class="tabcontent w3-container" style="padding:0; width:100%; border: thin black solid;">
+			<div id="contentSearchResults" class="tabcontent w3-container" style="padding:0; width:100%; border: thin black solid;">
 				<div v-for="m in matches" class="w3-card">
 					<div class="w3-container" style="padding:8px; margin-top: 0px;">
 						<template v-if="m.Icon != ''">
-							<img class="sb_icon" @click="updateMySchoolList(m)" title="Click to add to your school list" v-bind:src="'/cfpimages/school/icons/batch/'+m.Icon" height="54px" /> &nbsp;
+							<img id="sb_icon" v-bind:src="'/cfpimages/schools/icons/batch/'+m.Icon" height="54px" style="margin:4px; float:left" /> &nbsp;
 						</template>
 						<template v-else>
-							<img class="sb_icon" @click="updateMySchoolList(m)" title="Click to add to your school list" class="sb_icon" src="/cfpimages/space.png" height="54px" /> &nbsp;
+							<img id="sb_icon" src="/cfpimages/space.png" height="54px" style="margin:4px;float:left" /> &nbsp;
 						</template>
 						<div style="float:left; margin-left: 8px; margin-top: 4px;">
-							<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">
-
-<input style="display:inline" type="checkbox" @click="updateMySchoolList(m)" v-model="mySchoolCodes" v-bind:value="m.SchoolCode">
-							{{ m.FullName }}</h4>
-							<br /><h6 style="display:inline; color: #aab" id="sb_schooladdress">{{ m.City }}, {{ m.State }}</h6>
+							<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ m.ShortName }}</h4>
+							<br /><h6 style="display:inline; color: #aab" id="sb_schoolname">{{ m.City }}, {{ m.State }}</h6>
 						</div>
 						<div style="float:right; margin-left: 12px; margin-top: 4px; border:thin dashed white">
 							<h6 style="display:inline;">
@@ -234,64 +181,11 @@
 				</div>
 			</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			<!-- <div id="errormsg"></div> -->
+			<div id="errormsg"></div>
 
 		</div>
 
-		<!-- <div id="leftsidenav" class="col-md-4"> -->
-		<div class="griditem"></div>
+	</div>
 
-	</div> <!-- /.grid-container -->
+</div> <!-- /.grid-container -->
 
-
-<!-- Footer -->
-<div id="footer"></div>
-
-
-</body>
-</html>
-
-
-<script>
-	function test() {
-		// alert("Hello");
-		console.log(search);
-		search.keyword = 'Alabama';
-		search.getSchools();
-	}
-
-	function openTab() {
-		console.log($(this));
-		let tab = $(this).attr("id");
-		console.log(tab);
-		return;
-		console.log("OpeningTab " + tabName);
-		console.log("OpeningTab " + tabName);
-		$(".tabcontent").css("display", "none");
-		$("#content" + tabName).css("display", "block");
-		$(".tablink").removeClass("w3-blue");
-		$("#tab" + tabName).addClass("w3-blue");
-	}
-</script>
-
-<script>
-	search = vueSearch();
-	enableTabs();
-	setTimeout(function() { $("#tabMySchools").trigger("click") }, 1);
-	// openTab("MySchools");	
-</script>

@@ -1,61 +1,84 @@
 #demo-frame > div.demo { 
-  padding: 10px !important;
+	padding: 10px !important;
 } 
 
-  #demo-frame > div.demo { padding: 10px !important; } 
+#demo-frame > div.demo {
+	padding: 10px !important;
+} 
 
-  #searchOptions {
-    font-family: Lato,Helvetica,Arial,sans-serif;
-    font-size: 13px;
-    width: 332px;
-    background-color: #eee;
-    border: thin gray solid;
-    padding: 14px;
-  }
-  #searchResults {
-    font-family: Lato,Helvetica,Arial,sans-serif;
-    font-size: 13px;
-    padding: 14px;
-    margin-top: 90px;
-  }
-  .section {
-    margin: 18px 0px 10px 2px;    
-    font-weight: bold;
-    white-space: nowrap;
-    font-size:14px;
-  }
-  .label {
-    margin: 14px 0px 3px 2px;   
-    font-weight: normal;
-    white-space: nowrap;
-  }
-  .searchcontainer {
-    background-color: white;
-    border: thin gray solid;
-    height: 104px;
-    overflow-y: auto;
-    width: 300px;
-    padding: 4px;
-    box-sizing: border-box;
-  }
-  .label:first-child {
-    margin-top: 0px;
-  }
-  .sliderText {
-    font-size: 13px; 
-    text-align: center; 
-    border:0; 
-    width:160px; 
-    background-color:#fff
-  }
+#searchOptions {
+	font-family: Lato,Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	width: 332px;
+	background-color: #eee;
+	border: thin gray solid;
+	padding: 14px;
+}
+#searchResults {
+	font-family: Lato,Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	padding: 14px;
+	margin-top: 90px;
+}
+.section {
+	margin: 18px 0px 10px 2px;    
+	font-weight: bold;
+	white-space: nowrap;
+	font-size:14px;
+}
+.label {
+	margin: 14px 0px 3px 2px;   
+	font-weight: normal;
+	white-space: nowrap;
+}
+.searchcontainer {
+	background-color: white;
+	border: thin gray solid;
+	height: 104px;
+	overflow-y: auto;
+	width: 300px;
+	padding: 4px;
+	box-sizing: border-box;
+}
+.label:first-child {
+	margin-top: 0px;
+}
+.sliderText {
+	font-size: 13px; 
+	text-align: center; 
+	border:0; 
+	width:160px; 
+	background-color:#fff
+}
 
 
-  .postcard {
-    margin-top:14px;
-    border: thin gray solid;
-    background-color: #eee;
-    padding: 10px;
-  }
-  .postcard:first-child {
-    margin-top:-14px;    
-  }
+.postcard {
+	margin-top:14px;
+	border: thin gray solid;
+	background-color: #eee;
+	padding: 10px;
+}
+.postcard:first-child {
+	margin-top:-14px;    
+}
+
+
+#xcontentMySchools .xsb_icon:hover {
+	filter: grayscale(90%);
+	/*border: medium black solid;*/
+	box-shadow: 0 6px 10px 0 rgb(255 0 0 / 80%), 0 6px 20px 0 rgb(0 255 0 / 80%);
+}
+
+
+.sb_icon {
+	/*filter: grayscale(90%); */
+	margin:4px; 
+	float:left
+}
+.sb_icon:hover {
+	border: #ccc solid medium;
+	/*filter: none;*/
+	/*-webkit-filter: grayscale(0%);*/
+	/*border: thin black solid;*/
+	box-shadow: 0 5px 10px 0 rgb(0 0 0 / 40%), 0 5px 20px 0 rgb(0 0 0 / 40%);
+}

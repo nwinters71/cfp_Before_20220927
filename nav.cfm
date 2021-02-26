@@ -21,7 +21,15 @@ div.sticky {
 
 <div class="w3-bar sticky" style="background-color: #343a40; padding: 2px 200px; overflow: visible;">
 	<a class="w3-bar-item" href="index.html"><img src="/cfpimages/golden-ticket.png" height="36" />&nbsp; <span style="font-family:courier new; font-weight:bold; color:white">College Fast Pass</span></a>
-	<span id="account" class="w3-bar-item w3-right"><a onclick="document.getElementById('login_form').style.display='block';" class="w3-bar-item w3-right" href="#">Sign In</a></span>
+
+	<span id="account" class="w3-bar-item w3-right">
+		<cfif isDefined("session.user.loggedIn") AND session.user.loggedIn>
+			<a id="signout" class="w3-bar-item w3-right" href="#">Sign Out</a>
+		<cfelse>
+			<a id="signin" class="w3-bar-item w3-right" href="#" onclick="$('#login_form').css('display','block')">Sign In</a>
+		</cfif>
+	</span>
+
 	<span class="w3-bar-item w3-right"><a href="index.html" class="w3-bar-item">Research</a></span>
 	<!--- <span class="w3-bar-item w3-right"><a href="table.html" class="w3-bar-item">Analyze</a></span> --->
 	<span class="w3-bar-item w3-right"><a href="vueSearch.html" class="w3-bar-item">Schools</a></span>
@@ -104,7 +112,14 @@ div.sticky {
 
 
 <script>
-  
+ 
+$("#signout").on("click", function() {
+	$.ajax({url:"api/user.cfm?action=logout"})
+		.done(function(data) {
+			window.location.href = "/cfp";
+		});
+});
+
 function loginDialog(action) {
 	let reqObj = {};
 	

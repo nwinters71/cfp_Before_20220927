@@ -1,18 +1,16 @@
 <a id="signout" href="#" class="w3-bar-item">Sign Out</a>
 
-<cfabort>
 
 <script>
 $("#signout").on("click", function() {
-
-  var tmp = $.ajax({url:"api/user.cfm?action=logout"})
-              .done(function(data) {
-                window.location.href = "/cfp";
-              });
-
+	$.ajax({url:"api/user.cfm?action=logout"})
+		.done(function(data) {
+			window.location.href = "/cfp";
+		});
 });
 </script>
 
+<cfabort>
 
 <div class="w3-bar-item w3-dropdown-hover" style="z-index: 1200">
   <!--- <button class="w3-button"> --->

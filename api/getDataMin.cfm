@@ -70,24 +70,42 @@
 <cfabort /> --->
 
 <cfquery name="getMissingSlugs" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
-  select  * 
-  from    view_MissingSchoolSlugs 
-  <!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
-  where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
-  and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
-  order   by siteCode, schoolCode
+	select  * 
+	from    view_MissingSchoolSlugs 
+	<!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
+	where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
+	and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
+	order   by siteCode, schoolCode
 </cfquery>
 
 <cfset missing = {} />
 <cfset currSite = "" />
 <cfloop query="#getMissingSlugs#">
-    <cfif currSite NEQ siteCode>
-      <cfset currSite = siteCode />
-      <cfset missing[currSite] = "" />
-    </cfif>
-    <cfset missing[currSite] = listAppend(missing[currSite], schoolCode) />
+	<cfif currSite NEQ siteCode>
+		<cfset currSite = siteCode />
+		<cfset missing[currSite] = "" />
+	</cfif>
+	<cfset missing[currSite] = listAppend(missing[currSite], schoolCode) />
 </cfloop>
 
+<cfquery name="getMissingSlugs2" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
+	select  * 
+	from    view_MissingSchoolSlugs 
+	<!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
+	where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
+	and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
+	order   by schoolCode, siteCode
+</cfquery>
+
+<cfset missing2 = {} />
+<cfset currSchool = "" />
+<cfloop query="#getMissingSlugs2#">
+	<cfif currSchool NEQ schoolCode>
+		<cfset currSchool = schoolCode />
+		<cfset missing2[currSchool] = "" />
+	</cfif>
+	<cfset missing2[currSchool] = listAppend(missing2[currSchool], siteCode) />
+</cfloop>
 
 
 <cfif isDefined("url.dump")>
@@ -99,6 +117,7 @@
   <cfset resp.schoolcodes = quotedvalueList(getSchools.SchoolCode) />
   <cfset resp.sites = getLinks />
   <cfset resp.missingslugs = missing />
+  <cfset resp.missingslugs2 = missing2 />
   <cfcontent reset="true" type="text/plain"><cfoutput>#serializeJSON(resp)#</cfoutput><cfabort />
 </cfif>
 

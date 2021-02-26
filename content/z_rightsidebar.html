@@ -1,0 +1,176 @@
+          <!-- <img id="side-image" src="./assets/images/school/image-harvard.jpg" width="100%" height="233" />
+          <div class="msg"></div> -->
+          <div style="margin-top:-6px;" />
+          
+            <div style="float:left">
+               <img id="sb_icon"  src="" height="36px" /> &nbsp;
+            </div>
+              <h3 id="sb_schoolname" class="my-3">Test</h3>
+          </div>
+ 
+<script>
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+</script>
+
+        <div id="vueRightSidebar">
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Admissions')">Admissions!</button>
+            <button class="tablinks" onclick="openCity(event, 'Notes')">Notes!</button>
+            <button class="tablinks" onclick="openCity(event, 'Info')">Info!</button>
+          </div>
+
+          <div id="Notes" class="tabcontent">
+
+            <strong style="font-size:15px">Interest: </strong>
+              <select id="sb_interest">
+                <option>Not Interested</option>
+                <option>Not Very</option>
+                <option>Neutral</option>
+                <option>Somewhat</option>
+                <option>Very</option>
+              </select>
+      
+            <br /><strong style="font-size:15px">Classification: </strong>
+              <select id="sb_interest">
+                <option></option>
+                <option>Safety</option>
+                <option>Target</option>
+                <option>Reach</option>
+              </select>
+
+            <br /><strong style="font-size:15px">Status: </strong>
+              <select id="sb_status">
+                <option></option>
+                <option>Interested</option>
+                <option>Applied</option>
+                <option>Accepted</option>
+                <option>Waitlisted</option>
+                <option>Enrolled</option>
+                <option>Denied</option>
+              </select>
+            <br /><strong style="font-size:15px">Notes</strong><br /><textarea cols="34" rows="6" id="school_notes"></textarea>
+          </div>
+
+          <div id="Admissions" class="tabcontent">
+
+            <strong style="font-size:15px">Admissions Stats</strong>
+            <table id="tblAdmissions" border="1" cellspacing="0" cellpadding="4" width="100%">
+              <thead>
+                <tr>
+                  <td width="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td style="text-align: center; font-size: 13px; font-weight: bold" width="30%">Total</td>
+                  <td style="text-align: center; font-size: 13px; font-weight: bold" width="30%">Men</td>
+                  <td style="text-align: center; font-size: 13px; font-weight: bold" width="30%">Women</td>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr><td colspan="4"><button onclick="refreshRightSidebar();">Refresh</button></td></tr> -->
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">Applied:&nbsp;</td>
+                  <td id="applcn">{{ school.applcn }}</td>
+                  <td id="applcnm">{{ school.applcnm }}</td>
+                  <td id="applcnw">{{ school.applcnw }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">Admitted:&nbsp;</td>
+                  <td id="admssn">{{ school.admssn }}</td>
+                  <td id="admssnm">{{ school.admssnm }}</td>
+                  <td id="admssnw">{{ school.admssnw }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">Enrolled:&nbsp;</td>
+                  <td id="enrlt">{{ school.enrlt }}</td>
+                  <td id="enrlm">{{ school.enrlm }}</td>
+                  <td id="enrlw">{{ school.enrlw }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <strong style="font-size:15px">Test Scores</strong>
+            <table id="tblScores" border="1" cellspacing="0" cellpadding="4" width="100%">
+              <thead>
+                <tr>
+                  <td width="300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">25th %</td>
+                  <td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">75th %</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">SAT Math:&nbsp;</td>
+                  <td id="satmt25">{{ school.satmt25 }}</td>
+                  <td id="satmt75">{{ school.satmt75 }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">SAT EBRW:&nbsp;</td>
+                  <td id="satvr25">{{ school.satvr25 }}</td>
+                  <td id="satvr75">{{ school.satvr75 }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">ACT Composite:&nbsp;</td>
+                  <td id="actcm25">{{ school.actcm25 }}</td>
+                  <td id="actcm75">{{ school.actcm75 }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
+                  <td id="actmt25">{{ school.actmt25 }}</td>
+                  <td id="actmt75">{{ school.actmt75 }}</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 13px; font-weight: bold">ACT English:&nbsp;</td>
+                  <td id="acten25"></td>
+                  <td id="acten75"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <p id="explain">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p> -->
+            <!-- <h3 class="my-3">Project Details</h3>
+            <ul>
+              <li>Lorem Ipsum</li>
+              <li>Dolor Sit Amet</li>
+              <li>Consectetur</li>
+              <li>Adipiscing Elit</li>
+            </ul>
+            <br /><hr /> -->
+          </div>
+          <div id="Info" class="tabcontent">
+
+            <br /><strong style="font-size:15px">Contact Info</strong>
+            <table id="contactinfo" style="border: 0px; width: 100%">  <!-- background-color:#eee;  -->
+              <tr><td width="100px">Phone:</td><td><span id="sb_phone"></span></td></tr>            
+              <tr valign="top" style="margin-top:100px;">
+                <td>Address:</td>
+                <td><a id="side-address" target="_blank"><span id="sb_address_line1"></span><span id="sb_address_line2"></span></a></td>
+              </tr>
+              <tr>
+                <td align="center" colspan="2" id="sb_map"></td>
+              </tr>
+            </table>
+          
+          </div>
+        </div>
+        <!-- </template> -->
+
+
+
+ <br /><br /><br /><br />&nbsp;

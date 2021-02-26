@@ -15,108 +15,96 @@ function allToggle(id) {
 
 function mySchools() {
 
-  var params = {};
-  console.log("myschools");
-  params.action = "myschools";
-  var tmp = $.ajax({
-              url:"api/search.cfm",
-              dataType: "json",
-              type: "post",
-              data: params
-            })
-              .done(function(data) {
-                console.log(data);
-                results = "";
-                for (let school of data) {
-                  if (school.UserUUID.length > 0) {
-                    results = results + '<tr><td><input type="checkbox" checked class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
-                  } else {
-                    results = results + '<tr><td><input type="checkbox" class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
-                  }
-                }
-
-                $("#tblSearchResults>tbody").html(results);
-                if (data == "false") {
-                  loggedIn = false;
-                  $("#login").html("Sign In");
-                } else {
-                  loggedIn = true;
-                  $("#login").html("Log Out");
-                }
-
-                console.log(typeof addBehavior);
-
-                if (!flgBehaviorAdded) {
-                  addBehavior();
-                }
-
-              });
+	var params = {};
+	console.log("myschools");
+	params.action = "myschools";
+	$.ajax({
+				url:"api/search.cfm",
+				dataType: "json",
+				type: "post",
+				data: params
+			})
+			.done(function(data) {
+				console.log(data);
+				results = "";
+				for (let school of data) {
+					if (school.UserUUID.length > 0) {
+						results = results + '<tr><td><input type="checkbox" checked class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
+					} else {
+						results = results + '<tr><td><input type="checkbox" class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
+					}
+				}
+				$("#tblSearchResults>tbody").html(results);
+				if (data == "false") {
+					loggedIn = false;
+					$("#login").html("Sign In");
+				} else {
+					loggedIn = true;
+					$("#login").html("Log Out");
+				}
+				console.log(typeof addBehavior);
+				if (!flgBehaviorAdded) {
+					addBehavior();
+				}
+			});
 }
 
 
 function doSearch() {
-  var params = {};
-  params.action = "search";
-  params.keyword = $("#keyword").val();
-  params.state = "GA";
-  // console.log(params);
-  var tmp = $.ajax({
-              url:"api/search.cfm",
-              dataType: "json",
-              type: "post",
-              data: params
-            })
-              .done(function(data) {
-                // console.log(data);
-                results = "";
-                for (let school of data) {
-                  if (school.UserUUID ==  1) {
-                    results = results + '<tr><td><input type="checkbox" checked class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
-                  } else {
-                    results = results + '<tr><td><input type="checkbox" class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
-                  }
-                }
-                // console.log(results);
+	var params = {};
+	params.action = "search";
+	params.keyword = $("#keyword").val();
+	params.state = "GA";
+	// console.log(params);
+	$.ajax({
+			url:"api/search.cfm",
+			dataType: "json",
+			type: "post",
+			data: params
+	})
+	.done(function(data) {
+		// console.log(data);
+		results = "";
+		for (let school of data) {
+			if (school.UserUUID ==  1) {
+				results = results + '<tr><td><input type="checkbox" checked class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
+			} else {
+				results = results + '<tr><td><input type="checkbox" class="cbSchoolID" id="schools" value="' + school.SchoolCode + '" /> ' + school.FullName + '</td><td nowrap>' + school.City + ', ' + school.State + '</td><td align="center">' + school.enrlt + '</td><td nowrap align="center">' + school.satmt25 + ' - ' + school.satmt75 + '</td></tr>'
+			}
+		}
+		// console.log(results);
+		$("#tblSearchResults>tbody").html(results);
+		if (data == "false") {
+			loggedIn = false;
+			$("#login").html("Sign In");
+		} else {
+			loggedIn = true;
+			$("#login").html("Log Out");
+		}
 
-                $("#tblSearchResults>tbody").html(results);
-                if (data == "false") {
-                  loggedIn = false;
-                  $("#login").html("Sign In");
-                } else {
-                  loggedIn = true;
-                  $("#login").html("Log Out");
-                }
+		console.log(typeof addBehavior);
 
-                console.log(typeof addBehavior);
-
-                if (!flgBehaviorAdded) {
-                  addBehavior();
-                }
-
-              });
+		if (!flgBehaviorAdded) {
+			addBehavior();
+		}
+	});
 }
 
 function addBehavior() {
+	$("table#tblSearchResults").on("click", ".cbSchoolID", function(){
+		let params = {};
+		params.type = "school";
+		params.action = ((this.checked == true) ? 'add' : 'remove');
+		params.schoolcode = this.value;
+		$.ajax({
+			url:"api/faves.cfm",
+			data:params,
+			type:"post",
+			success: function(data) {}          
+		});
+	});
 
-    $("table#tblSearchResults").on("click", ".cbSchoolID", function(){
-
-      var params = {};
-
-      // alert("hello");
-      // console.log(this.value);
-
-      params.type = "school";
-      params.action = ((this.checked == true) ? 'add' : 'remove');
-      params.schoolcode = this.value;
-      $.ajax({
-        url:"api/faves.cfm",
-        data:params,
-        type:"post",
-        success: function(data) {}          
-      });
-    });
-
-    flgBehaviorAdded = true;
+	flgBehaviorAdded = true;
 
 /*
   console.log(document.cookie);

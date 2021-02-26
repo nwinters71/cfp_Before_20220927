@@ -25,12 +25,33 @@
 			, a.admcon9 cons_toefl
 			, a.applcn, a.applcnm, a.applcnw, a.admssn, a.admssnm, a.admssnw
 			, a.enrlt, a.enrlm, a.enrlw, a.enrlft, a.enrlftm, a.enrlftw, a.enrlpt, a.enrlptm, a.enrlptw
-			, s.fullname, s.shortname, s.icon, s.image, s.address1, s.city, s.state, s.zip, s.phone, s.domain
+			, s.fullname, s.shortname, 
+			case 
+				when length(s.icon) then concat('/cfpimages/school/icons/batch2/',s.icon) 
+				else '' 
+			end icon, 
+			case
+				when length(s.image) then concat('/cfpimages/school/images/',s.image) 
+				else ''
+			end image, s.address1, s.city, s.state, s.zip, s.phone, s.domain
 	from 	ipeds.hd2017 h 
 			left join ipeds.adm2017 a on h.UNITID = a.UNITID
 			join cfp.tblschool s on h.UNITID = s.UnitID
 	where  s.SchoolCode IN (#preserveSingleQuotes(url.id)#)
 </cfquery>
+
+
+<cfquery name="resp.getMajors" datasource="CFP">
+	select 	cip.cipCode, cip.cipTitle, count(distinct c.cipcode) NumberOfMajors, sum(c.CTOTALT) NumberOfUnderGradsMajor
+	from 	ipeds.c2019a c -- on cip.cipcode = c.cipcode
+			join ipeds.cipcode2010 cip on Left(c.cipcode, 2) = cip.cipcode
+	where 	UNITID = '130794' -- Yale
+	and 	c.MAJORNUM = 1
+	and 	c.AWLEVEL = 5
+	group 	by cip.cipCode, cip.CIPTitle
+	order 	by CIPTitle 
+</cfquery>
+
 	<!--- where  s.SchoolCode = <cfqueryparam cfsqltype="cf_sql_varchar" maxlength="5" value="#url.id#" /> --->
 
 <!--- <cfquery name="resp.getMajors" datasource="CFP">
