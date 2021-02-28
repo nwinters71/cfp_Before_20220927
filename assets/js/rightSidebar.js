@@ -25,6 +25,11 @@ function vueRightSidebar() {
 				}
 				return false;
 			},
+			schoolmap: function() {
+				let mapstr = '<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(this.school.ShortName) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>';
+				console.log(mapstr);
+				return mapstr;
+			},
 			currSchoolCode: { 
 				get: function() { 
 						console.log("That's what I thought!");
@@ -40,7 +45,9 @@ function vueRightSidebar() {
 			school: function() {
 				// console.log(store.state.currSchoolCode);
 				// console.log(store.state.mySchoolCodes);
-				return (store.state.mySchoolList[store.state.mySchoolCodes.indexOf(store.state.currSchoolCode)]);
+				// console.log(store.state.mySchoolList[store.state.mySchoolCodes.indexOf(store.state.currSchoolCode)]);
+				// self.school.Map = '<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(self.school.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>';
+				return store.state.mySchoolList[store.state.mySchoolCodes.indexOf(store.state.currSchoolCode)];
 			},
 		},
 		watch: {
@@ -62,7 +69,7 @@ function vueRightSidebar() {
 					function(response) {
 						// console.log(response);
 						self.school = response.getSchool[0];                       
-						self.school.map = '<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(self.school.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>';
+						self.school.Map = '<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(self.school.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>';
 						// $("#sb_map").html('<div class="mapouter" style="margin-top:10px"><div class="gmap_canvas" style="border: thick #bbb solid"><iframe width="340" height="320" id="gmap_canvas" src="https://maps.google.com/maps?q=' + escape(self.school.shortname) + '&t=&z=5&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div></div>');
 					},
 					function(response) {

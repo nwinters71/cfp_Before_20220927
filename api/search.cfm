@@ -10,13 +10,15 @@
 		  SELECT  	s.UnitID, s.SchoolCode, s.FullName, s.ShortName,
 				 	s.Address1, s.City, s.State, s.Zip, s.Phone, s.Domain,
 					case 
-						when length(s.icon) then concat('/cfpimages/school/icons/batch2/',s.icon) 
+						when length(s.icon) then concat('/cfpimages/school/icons/batch/',s.icon) 
 						else '' 
 					end Icon, 
 					case
 						when length(s.image) then concat('/cfpimages/school/images/',s.image) 
 						else ''
 					end Image
+					, a.applcn, a.applcnm, a.applcnw, a.admssn, a.admssnm, a.admssnw
+					, a.enrlt, a.enrlm, a.enrlw, a.enrlft, a.enrlftm, a.enrlftw, a.enrlpt, a.enrlptm, a.enrlptw
 					, a.satvr25, a.satvr75, a.satmt25, a.satmt75, a.acten25, a.acten75, a.actmt25, a.actmt75, a.actcm25, a.actcm75, a.satnum, a.satpct, a.actnum, a.actpct
 					, a.admcon1 cons_hsrank
 					, a.admcon2 cons_hsgpa

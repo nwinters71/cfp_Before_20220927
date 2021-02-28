@@ -390,3 +390,7 @@ p {
 w3-bar-item {
 	margin-left: 21px !important;
 }
+
+.factor {
+	text-align: center;
+}

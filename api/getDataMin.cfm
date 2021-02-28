@@ -15,84 +15,45 @@
 </cfquery>
 
 <cfif getSchools.recordCount LT 8>
-  <cfquery name="getSchools" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
-      SELECT  S.shortName, S.Icon schoolIcon, S.schoolCode
-      FROM    tblSchool S
-              JOIN tblUserSchools U ON S.schoolCode = U.schoolCode
-      WHERE   U.UserUUID = <cfqueryparam cfsqltype="cf_sql_varchar" value="#UserUUID#" />
-      AND     S.ActiveFlag = 1
-    UNION
 
-    SELECT  shortName, S.Icon schoolIcon, schoolCode
-    FROM    tblSchool S
-    WHERE   S.ActiveFlag = 1
-    AND     FullName IN (#PreserveSingleQuotes(schoolList)#)
-    AND     S.ActiveFlag = 1
-  --  AND     S.SchoolCode NOT IN (#QuotedValueList(getSchools.schoolCode)#)
-    
-    ORDER   BY shortName
-  </cfquery>
+	<cfquery name="getSchools" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#" maxrows="8">
+		SELECT  S.shortName, S.Icon schoolIcon, S.schoolCode, 1 Rank
+		FROM    tblSchool S
+		JOIN 	tblUserSchools U ON S.schoolCode = U.schoolCode
+		WHERE   U.UserUUID = <cfqueryparam cfsqltype="cf_sql_varchar" value="#UserUUID#" />
+		AND     S.ActiveFlag = 1
+
+		UNION
+
+		SELECT  shortName, S.Icon schoolIcon, schoolCode, 2 Rank
+		FROM    tblSchool S
+		WHERE   S.ActiveFlag = 1
+		AND     FullName IN (#PreserveSingleQuotes(schoolList)#)
+		AND     S.ActiveFlag = 1
+
+	</cfquery>
 </cfif>
 
-<cfset schoolList = quotedValueList(getSchools.Shortname) />
-
-<!--- <cfquery name="getLinks" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
-  SELECT  linkCode, parentCode, siteName, W.SiteCode, W.Icon, Title LinkTitle
-          , (SELECT Count(1) FROM tblLink WHERE ParentCode = L.LinkCode) hasSublinks
-  FROM    tblSite W
-          JOIN tblLink L ON L.SiteCode = W.SiteCode
-  WHERE   W.ActiveFlag = 1
-  AND     L.ActiveFlag = 1
-  ORDER   BY IF(SiteID<67, SiteID, 1), LinkID;
-</cfquery> --->
-
+<cfset schoolList = quotedValueList(getSchools.shortName) />
 
 <cfquery name="getLinks" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
-  SELECT  SortOrder, LL.Type, LL.LinkID, LL.linkCode, LL.parentCode, W.siteName, W.SiteCode, W.Icon, LL.Title LinkTitle
-          , (SELECT Count(1) FROM tblLayoutLinks WHERE ParentCode = LL.LinkCode and LL.LinkCode <> '') hasSublinks
-  FROM    tblLayout Y
-          JOIN tblLayoutLinks LL ON Y.LayoutUUID = LL.LayoutUUID 
-          LEFT JOIN tblLink L ON LL.LinkCode = L.LinkCode AND L.ActiveFlag = 1
-          LEFT JOIN tblSite W ON W.SiteCode = L.SiteCode AND W.ActiveFlag = 1
-  WHERE   LL.ActiveFlag = 1
-  AND     LL.Type = 'Link'
-  ORDER   BY LL.SortOrder, L.LinkID
-  -- LIMIT   3
+	SELECT  SortOrder, LL.Type, LL.LinkID, LL.linkCode, LL.parentCode, W.siteName, W.SiteCode, W.Icon, LL.Title LinkTitle
+			, (SELECT Count(1) FROM tblLayoutLinks WHERE ParentCode = LL.LinkCode and LL.LinkCode <> '') hasSublinks
+	FROM    tblLayout Y
+			JOIN tblLayoutLinks LL ON Y.LayoutUUID = LL.LayoutUUID 
+			LEFT JOIN tblLink L ON LL.LinkCode = L.LinkCode AND L.ActiveFlag = 1
+			LEFT JOIN tblSite W ON W.SiteCode = L.SiteCode AND W.ActiveFlag = 1
+	WHERE   LL.ActiveFlag = 1
+	-- AND 	L.ParentCode = ''
+	AND     LL.Type = 'Link'
+	ORDER   BY LL.SortOrder, L.LinkID
 </cfquery>
 
-
-<!--- <cfoutput><hr /><xmp>select  * 
-  from    view_MissingSchoolSlugs 
-  <!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
-  where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
-  and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
-  order   by siteCode, schoolCode</xmp><hr /></cfoutput>
-<cfabort /> --->
-
-<cfquery name="getMissingSlugs" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
-	select  * 
-	from    view_MissingSchoolSlugs 
-	<!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
-	where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
-	and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
-	order   by siteCode, schoolCode
-</cfquery>
-
-<cfset missing = {} />
-<cfset currSite = "" />
-<cfloop query="#getMissingSlugs#">
-	<cfif currSite NEQ siteCode>
-		<cfset currSite = siteCode />
-		<cfset missing[currSite] = "" />
-	</cfif>
-	<cfset missing[currSite] = listAppend(missing[currSite], schoolCode) />
-</cfloop>
 
 <cfquery name="getMissingSlugs2" datasource="CFP" cachedwithin="#CreateTimeSpan( 0, 0, 0, 10)#">
 	select  * 
 	from    view_MissingSchoolSlugs 
-	<!--- where SchoolCode IN (#PreserveSingleQuotes(schoolList)#) --->
-	where   ShortName IN (#PreserveSingleQuotes(schoolList)#)
+	where   SchoolCode IN (#QuotedValueList(getSchools.schoolCode)#)
 	and     SiteCode IN (#QuotedValueList(GetLinks.SiteCode)#)
 	order   by schoolCode, siteCode
 </cfquery>
@@ -116,7 +77,7 @@
   <cfset resp.schools = getSchools />
   <cfset resp.schoolcodes = quotedvalueList(getSchools.SchoolCode) />
   <cfset resp.sites = getLinks />
-  <cfset resp.missingslugs = missing />
+  <!--- <cfset resp.missingslugs = missing /> --->
   <cfset resp.missingslugs2 = missing2 />
   <cfcontent reset="true" type="text/plain"><cfoutput>#serializeJSON(resp)#</cfoutput><cfabort />
 </cfif>

@@ -209,17 +209,49 @@ function updateMissingLinks() {
 }
 
 function disableJump(school, site) {
+	let row = "";
 	let target = "";
+	let tgt = "";
 	let colPos = $("img[schoolid="+school+"]").parent().parent().index();
 	// console.log(colPos);
 	if (colPos > -1) {
-		target = $("div[site="+site+"]");
+		row = $("div[site="+site+"]");
+		// row = $("div[site="+site+"]");
 		// console.log(target);
-		target = $("div", target).eq(colPos);
-		target.removeClass("jump");
-		target.addClass("nojump");
-		target.prop("onclick", null).off("click");
-		target.prop("onmouseover", null).off("mouseover");
+
+// if (1 == 1) {
+
+		$("div[site="+site+"]").each(function(idx, elem) {
+			tgt = $("div", elem).eq(colPos);
+			tgt.removeClass("jump");
+			tgt.addClass("nojump");
+			tgt.prop("onclick", null).off("click");
+			tgt.prop("onmouseover", null).off("mouseover");
+		});
+
+// } else {
+// 		target = $("div", row).eq(colPos);
+// 		target.removeClass("jump");
+// 		target.addClass("nojump");
+// 		target.prop("onclick", null).off("click");
+// 		target.prop("onmouseover", null).off("mouseover");
+
+// 		site = row.attr("site");
+// 		// console.log("Site: " + site);
+
+// 		while (row.next().attr("site") == site) {
+// 			row = row.next();
+// 			// console.log(row.attr("value"));
+// 			// if (row.hasClass("sublink")) {
+// 				tgt = $("div", row).eq(colPos);
+// 				tgt.removeClass("jump");
+// 				tgt.addClass("nojump");
+// 				tgt.prop("onclick", null).off("click");
+// 				tgt.prop("onmouseover", null).off("mouseover");
+// 			// }
+// 		}
+// }
+
 	}
 }
 
@@ -266,10 +298,10 @@ function renderGrid(schoolStart) {
 					// Expander   
 					if (link[9] > 0) {
 						// gridOutput += ' <div ondragstart="drag(event)" ondragover="drugged(event)" draggable="true" id="Row' + link[3] + '" value="' + link[3] + '" class="GridRow ' + firstPass + '"><div class="GridCell"> <p> <img id="expand_subrow' + link[3] + '" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" /><img id="collapse_subrow' + link[3] + '" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" /> &nbsp; ';
-						gridOutput += ' <div id="Row' + link[3] + '" value="' + link[3] + '" site="' + link[6] + '" class="GridRow ' + firstPass + '"><div class="GridCell"> <p> <img id="expand_subrow' + link[3] + '" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" /><img id="collapse_subrow' + link[3] + '" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" /> &nbsp; ';
+						gridOutput += ' <div id="Row' + link[3] + '" value="' + link[3] + '" site="' + link[6] + '" class="GridRow Test1 ' + firstPass + '"><div class="GridCell"> <p> <img id="expand_subrow' + link[3] + '" class="sectionExpand" src="/cfpimages/expand.jpg" title="Expand to view subsections of this site" /><img id="collapse_subrow' + link[3] + '" class="sectionCollapse" src="/cfpimages/collapse.jpg" title="Collapse subsections" /> &nbsp; ';
 					} else {
 						// No Sublinks
-						gridOutput += ' <div value="' + link[3] + '" site="' + link[6] + '" class="GridRow ' + firstPass + '"><div class="GridCell nosublink"> <p> <img src="" />';
+						gridOutput += ' <div value="' + link[3] + '" site="' + link[6] + '" class="GridRow Test2' + firstPass + '"><div class="GridCell nosublink"> <p> <img src="" />';
 					}
 					// Icon
 					if (link[7].length > 0) {
@@ -280,7 +312,7 @@ function renderGrid(schoolStart) {
 					gridOutput += '<span class="SiteName">' + link[5] + '</span></p></div>';
 				} else {
 					// Sublink Row
-					gridOutput += '<div value="' + link[3] + '" site="' + link[6] + '" class="GridRow ' + firstPass + ' sublink subrow' + link[4] + '"><div class="GridCell sublink2"><span class="SublinkName">' + link[8] + '</span></div>';
+					gridOutput += '<div value="' + link[3] + '" site="' + link[6] + '" class="GridRow Test3' + firstPass + ' sublink subrow' + link[4] + '"><div class="GridCell sublink2"><span class="SublinkName">' + link[8] + '</span></div>';
 				}
 
 				// for (let x = 0; x < 8; x++) {

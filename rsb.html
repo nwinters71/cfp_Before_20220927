@@ -1,151 +1,183 @@
 <!-- <template id="vueRightSidebar"> -->
 <div class="w3-container w3-white" style="height: 20px; position:sticky; top:54px; z-index:10;">
 </div>
-<div class="w3-container w3-white" style="height: 50px; position:sticky; top:74px; padding: 0px 0 3px 0;">
+
+<!-- ICON/NAME/IMAGE -->
+<div class="w3-container w3-white" style="border:height: 50px; position:sticky; top:74px; padding: 0px 0 3px 0; display:flex;">
 	<img id="sb_icon"  v-bind:src="school.Icon" height="36px" style="margin:4px;" /> &nbsp;
 	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ school.FullName }}</h4>
 </div>
-<!-- <template v-if="school.hasImage"> -->
 <div v-if="hasImage" class="w3-container w3-yellow" style="width: 100%; padding: 0"><img id="sb_image" v-bind:src="school.Image" width="370px" height="200px" /></div>
-<!-- </template> -->
+<!-- TABS -->
 <div class="w3-bar" style="background-color: maroon; position:sticky; top:120px; z-index:10; padding: 0">
 	<button id="tabAdmissions" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Admissions</button>
 	<button id="tabNotes" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Notes</button>
 	<button id="tabInfo" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Info</button>
 	<button id="tabGear" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Gear</button>
 </div>
+<!-- CONTENT -->
 <div class="w3-container w3-light-gray" style="height:1200px; padding: 8px">
 
-		<div id="contentAdmissions" tabclass="rsb" class="tabcontent">
-			<strong style="font-size:15px">Admissions Stats</strong>
-			<table id="tblAdmissions" border="1" cellspacing="0" cellpadding="4" width="100%">
-			<thead>
-				<tr>
-					<td></td>
-					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Total</td>
-					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Men</td>
-					<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Women</td>
-				</tr>
-			</thead>
+	<div id="contentAdmissions" tabclass="rsb" class="tabcontent">
+		<strong style="font-size:15px">Admissions Stats</strong>
+		<table id="tblAdmissions" border="1" cellspacing="0" cellpadding="4" width="100%">
+		<thead>
+			<tr>
+				<td></td>
+				<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Total</td>
+				<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Men</td>
+				<td style="text-align: center; font-size: 13px; font-weight: bold" width="1%">Women</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">Applied:&nbsp;</td>
+				<td id="applcn">{{ school.applcn }}</td>
+				<td id="applcnm">{{ school.applcnm }}</td>
+				<td id="applcnw">{{ school.applcnw }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">Admitted:&nbsp;</td>
+				<td id="admssn">{{ school.admssn }}</td>
+				<td id="admssnm">{{ school.admssnm }}</td>
+				<td id="admssnw">{{ school.admssnw }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">Enrolled:&nbsp;</td>
+				<td id="enrlt">{{ school.enrlt }}</td>
+				<td id="enrlm">{{ school.enrlm }}</td>
+				<td id="enrlw">{{ school.enrlw }}</td>
+			</tr>
+		</tbody>
+		</table>
+		<br />
+		<strong style="font-size:15px">Test Scores</strong>
+		<table id="tblScores" border="1" cellspacing="0" cellpadding="4" width="100%">
+		<thead>
+			<tr>
+				<td width="300">&nbsp;</td>
+				<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">25th %</td>
+				<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">75th %</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">SAT Math:&nbsp;</td>
+				<td id="satmt25">{{ school.satmt25 }}</td>
+				<td id="satmt75">{{ school.satmt75 }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">SAT EBRW:&nbsp;</td>
+				<td id="satvr25">{{ school.satvr25 }}</td>
+				<td id="satvr75">{{ school.satvr75 }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">ACT Composite:&nbsp;</td>
+				<td id="actcm25">{{ school.actcm25 }}</td>
+				<td id="actcm75">{{ school.actcm75 }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
+				<td id="actmt25">{{ school.actmt25 }}</td>
+				<td id="actmt75">{{ school.actmt75 }}</td>
+			</tr>
+			<tr>
+				<td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
+				<td id="actmt25">{{ school.acten25 }}</td>
+				<td id="actmt75">{{ school.acten75 }}</td>
+			</tr>
+		</tbody>
+		</table>
+		<!-- <br />
+		<strong style="font-size:15px">Factors Considered</strong>
+		<table id="tblFactors" border="1" cellspacing="0" cellpadding="4" width="100%">
 			<tbody>
 				<tr>
-					<td style="font-size: 13px; font-weight: bold">Applied:&nbsp;</td>
-					<td id="applcn">{{ hasImage }} {{ school.applcn }}</td>
-					<td id="applcnm">{{ school.applcnm }}</td>
-					<td id="applcnw">{{ school.applcnw }}</td>
+					<td colspan="2" style="font-size: 13px; font-weight: bold; background-color: #ccc">Academic:&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="font-size: 13px; font-weight: bold">Admitted:&nbsp;</td>
-					<td id="admssn">{{ school.admssn }}</td>
-					<td id="admssnm">{{ school.admssnm }}</td>
-					<td id="admssnw">{{ school.admssnw }}</td>
+					<td style="font-size: 13px; font-weight: bold">High school record:</td>
+					<td class="factor">{{ school.cons_hsrecord }}</td>
 				</tr>
 				<tr>
-					<td style="font-size: 13px; font-weight: bold">Enrolled:&nbsp;</td>
-					<td id="enrlt">{{ school.enrlt }}</td>
-					<td id="enrlm">{{ school.enrlm }}</td>
-					<td id="enrlw">{{ school.enrlw }}</td>
+					<td style="font-size: 13px; font-weight: bold">High school class rank:</td>
+					<td class="factor">{{ school.cons_hsrank }}</td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">High school academic GPA:</td>
+					<td class="factor">{{ school.cons_hsgpa }}</td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">Standardized test scores:</td>
+					<td class="factor">{{ school.cons_admtestscores }}</td>
+				</tr>
+				<tr>
+					<td style="font-size: 13px; font-weight: bold">Recommedation(s):</td>
+					<td class="factor">{{ school.cons_recommendations }}</td>
 				</tr>
 			</tbody>
-			</table>
-			<br />
-			<strong style="font-size:15px">Test Scores</strong>
-			<table id="tblScores" border="1" cellspacing="0" cellpadding="4" width="100%">
-			<thead>
-				<tr>
-					<td width="300">&nbsp;</td>
-					<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">25th %</td>
-					<td style="text-align: center; font-size: 13px; font-weight: bold" width="50%">75th %</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="font-size: 13px; font-weight: bold">SAT Math:&nbsp;</td>
-					<td id="satmt25">{{ school.satmt25 }}</td>
-					<td id="satmt75">{{ school.satmt75 }}</td>
-				</tr>
-				<tr>
-					<td style="font-size: 13px; font-weight: bold">SAT EBRW:&nbsp;</td>
-					<td id="satvr25">{{ school.satvr25 }}</td>
-					<td id="satvr75">{{ school.satvr75 }}</td>
-				</tr>
-				<tr>
-					<td style="font-size: 13px; font-weight: bold">ACT Composite:&nbsp;</td>
-					<td id="actcm25">{{ school.actcm25 }}</td>
-					<td id="actcm75">{{ school.actcm75 }}</td>
-				</tr>
-				<tr>
-					<td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
-					<td id="actmt25">{{ school.actmt25 }}</td>
-					<td id="actmt75">{{ school.actmt75 }}</td>
-				</tr>
-				<tr>
-					<td style="font-size: 13px; font-weight: bold">ACT Math:&nbsp;</td>
-					<td id="actmt25">{{ school.acten25 }}</td>
-					<td id="actmt75">{{ school.acten75 }}</td>
-				</tr>
-			</tbody>
-			</table>
+		</table> -->
+	</div>
 
-		</div>
+	<div id="contentNotes" tabclass="rsb" class="tabcontent">
+		<strong style="font-size:15px">Interest: </strong>
+		<select id="sb_interest">
+			<option>Not Interested</option>
+			<option>Not Very</option>
+			<option>Neutral</option>
+			<option>Somewhat</option>
+			<option>Very</option>
+		</select>
 
-		<div id="contentNotes" tabclass="rsb" class="tabcontent">
-			<strong style="font-size:15px">Interest: </strong>
-			<select id="sb_interest">
-				<option>Not Interested</option>
-				<option>Not Very</option>
-				<option>Neutral</option>
-				<option>Somewhat</option>
-				<option>Very</option>
-			</select>
+		<br />
+		<strong style="font-size:15px">Classification: </strong>
+		<select id="sb_interest">
+			<option></option>
+			<option>Safety</option>
+			<option>Target</option>
+			<option>Reach</option>
+		</select>
 
-			<br />
-			<strong style="font-size:15px">Classification: </strong>
-			<select id="sb_interest">
-				<option></option>
-				<option>Safety</option>
-				<option>Target</option>
-				<option>Reach</option>
-			</select>
+		<br />
+		<strong style="font-size:15px">Status: </strong>
+		<select id="sb_status">
+			<option></option>
+			<option>Interested</option>
+			<option>Applied</option>
+			<option>Accepted</option>
+			<option>Waitlisted</option>
+			<option>Enrolled</option>
+			<option>Denied</option>
+		</select>
+		<br />
+		<strong style="font-size:15px">Notes</strong>
+		<br />
+		<textarea cols="34" rows="6" id="school_notes"></textarea>
+	</div>
 
-			<br />
-			<strong style="font-size:15px">Status: </strong>
-			<select id="sb_status">
-				<option></option>
-				<option>Interested</option>
-				<option>Applied</option>
-				<option>Accepted</option>
-				<option>Waitlisted</option>
-				<option>Enrolled</option>
-				<option>Denied</option>
-			</select>
-			<br />
-			<strong style="font-size:15px">Notes</strong>
-			<br />
-			<textarea cols="34" rows="6" id="school_notes"></textarea>
-		</div>
-		<div id="contentInfo" tabclass="rsb" class="tabcontent">
-			<br /><strong style="font-size:15px">Contact Info</strong>
-			<table id="contactinfo" style="border: 0px; width: 100%">
-				<tr><td width="100px">Phone:</td><td><span id="sb_phone">{{ school.phone }}</span></td></tr>            
-				<tr valign="top" style="margin-top:100px;">
-					<td>Address:</td>
-					<td><a id="side-address" target="_blank"><span id="sb_address_line1">{{ school.address }}</span><span id="sb_address_line2">{{ school.city }}, {{ school.state }} {{ school.zip }}</span></a></td>
-				</tr>
-				<tr>
-					<td align="center" colspan="2" id="sb_map" v-html="school.map"></td>
-				</tr>
-			</table>
-		</div>
-		<div id="contentGear" tabclass="rsb" class="tabcontent">
-			<br /><strong style="font-size:15px">School Gear</strong>
-		</div>
-</div>
-
-	<footer class="w3-container w3-green">
-	  <h5>Footer</h5>
-	</footer>
+	<div id="contentInfo" tabclass="rsb" class="tabcontent">
+		<br /><strong style="font-size:15px">Contact Info</strong>
+		<table id="contactinfo" style="border: 0px; width: 100%">
+			<tr><td width="100px">Phone:</td><td><span id="sb_phone">{{ school.phone }}</span></td></tr>            
+			<tr valign="top" style="margin-top:100px;">
+				<td>Address:</td>
+				<td><a id="side-address" target="_blank"><span id="sb_address_line1">{{ school.Address1 }}</span><span id="sb_address_line2">{{ school.City }}, {{ school.State }} {{ school.Zip }}</span></a></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2" id="sb_map" v-html="schoolmap"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="contentGear" tabclass="rsb" class="tabcontent">
+		<br /><strong style="font-size:15px">School Gear</strong>
+	</div>
 
 </div>
+
+<footer class="w3-container w3-green">
+  <h5>Footer</h5>
+</footer>
+
+<!-- </div> -->
 
 <!-- </template> -->
