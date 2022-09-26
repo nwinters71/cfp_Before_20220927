@@ -6,6 +6,7 @@ const store = new Vuex.Store({
 		mySchoolList: [{"hello":"world"},{"hello1":"world1"},{"hello2":"world2"}],
 		mySchoolCodes: ["xxxxx","jrbeu"],
 		currSchoolCode: "jrbeu",
+		stickySchoolCode: "",
 		currSchoolIndex: 0,
 	},
 	mutations: {

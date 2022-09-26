@@ -48,6 +48,7 @@
 				<cfset qryUser = cfcLogin.AuthUser(form.email, form.password) />
 
 				<cfif qryUser.getUser.recordCount EQ 1>
+					<cfdump var="#qryUser#"><cfabort>
 					<!--- Set Session Variables --->
 					<cfset session.user.loggedIn = true />
 					<cfset session.user.loginDateTime = now() />
@@ -58,7 +59,7 @@
 					
 					<!--- Add logic to handle if user wishes to stay logged in --->
 
-					<cflocation url="login_form.cfm" addtoken="false" />
+					<cflocation url="login_form.cfm" addtoken="true" />
 
 				<cfelse>
 

@@ -8,6 +8,7 @@ function vueSearch() {
 			// 	ProfileActive: "Active",
 			// },
 			keyword: "",
+			state: [],
 			matches: [],
 			mySchools: [],
 			stillWaiting: false,
@@ -49,7 +50,11 @@ function vueSearch() {
 					// console.log("Keyword: " + this.keyword);
 					Search.stillWaiting = true;
 					setTimeout(function () {
-						var params = {"action":"getSchools", "keyword":Search.keyword};
+						var params = {
+							"action":"getSchools", 
+							"keyword":Search.keyword,
+							"state":Search.state
+						};
 						$.ajax({
 							url:"api/search.cfm",
 							dataType: "json",

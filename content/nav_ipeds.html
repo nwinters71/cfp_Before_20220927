@@ -12,7 +12,7 @@
 						<div>selectedTable: {{ selectedTable }}</div>
 						
 						<select name="Field" size="10" v-model="selectedField" @change="getValues()">
-							<option v-for="f in Fields" v-bind:value="f.VarNumber">{{ f.VarTitle}}</option>
+							<option v-for="f in Fields" v-bind:value="f.VarNumber">{{ f.VarName}} - {{ f.VarTitle }}</option>
 						</select>
 
 						<div>selectedField: {{ selectedField }}</div>

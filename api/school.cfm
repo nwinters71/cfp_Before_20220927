@@ -24,8 +24,24 @@
 			, a.admcon8 cons_othertest
 			, a.admcon9 cons_toefl
 			, a.applcn, a.applcnm, a.applcnw, a.admssn, a.admssnm, a.admssnw
-			, a.enrlt, a.enrlm, a.enrlw, a.enrlft, a.enrlftm, a.enrlftw, a.enrlpt, a.enrlptm, a.enrlptw
-			, s.fullname, s.shortname, 
+			, 200 enrlt, format(a.enrlm, 0), format(a.enrlw, 0), format(a.enrlft, 0), format(a.enrlftm, 0), format(a.enrlftw, 0), format(a.enrlpt, 0), format(a.enrlptm, 0), format(a.enrlptw, 0)
+			, s.fullname, s.shortname
+
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'kk6f')	Website
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = '3fuh')	About
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'rmfb')	Visit
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = '63w2')	VirtualTour
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'ov9z')	CampusMap
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'u7oj')	Directions
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'pz53')	Parking
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'mwwq')	ContactInfo
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'wxxe')	RequestInfo
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'wtni')	Facebook
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = '8c2c')	LinkedIn
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'n1ps')	Twitter
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = '92zt')	Youtube
+			, (select rawSlug from tblschoolslug where schoolcode = S.SchoolCode and sitecode = 'uct7')	Instagram
+
 			case 
 				when length(s.icon) then concat('/cfpimages/school/icons/batch2/',s.icon) 
 				else '' 

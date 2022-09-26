@@ -6,6 +6,7 @@ var sideBarData = '';
 var sideBarType = "";
 var sideBarId = "";
 var rsbSchoolID = "";
+var stickySchoolCode = "";
 
 $(document).ready(function() {
 
@@ -19,13 +20,28 @@ $(document).ready(function() {
 		updateMissingLinks();
 	});
 
+});
+
+
+function getRightSidebar() {
+	$.ajax({
+		url:"rsb.html", 
+		success: function(data) {
+			$("#vueRightSidebar").html(data);
+			rsb = vueRightSidebar();
+			enableTabs();
+			setTimeout(function() { $("#tabInfo").trigger("click") }, 1);
+		}
+	});
+}
+
+
+function setGridBehaviors() {
 	$(window).on("scroll", function() {
 		let scrollPos = Math.round($(window).scrollTop(), 2);
   //			$("#rightsidebar").css("margin-top", (scrollPos + 58) + "px");  // + 58 sets the position of the firstrow so that it isn't hidden or a gap between it and the headers
-
 		if (scrollPos < 248) {
 			// $(".SchoolName").css("display", "inline");              // school name disappears without this line
-			// $(".widget2").css("height", (300 - scrollPos) + "px");
 			$("#idWidget2").css("height", (300 - scrollPos) + "px");
 			$(".firstRow").css("margin-top", (scrollPos + 58) + "px");  // + 58 sets the position of the firstrow so that it isn't hidden or a gap between it and the headers
 		} else {
@@ -46,58 +62,31 @@ $(document).ready(function() {
 		this.style.backgroundColor='white';
 		this.style.cursor='cursor';
 	});
-
-});
-
-
-function getRightSidebar() {
-	// if (sideBarData == '') {
-	// 	var params = {"action":"getSchools", "id":GridData.SCHOOLCODES};
-	// 	// console.log("getRightSidebar");
-	// 	$.ajax({
-	// 		url:"api/school.cfm", 
-	// 		data: params,
-	// 		dataType: "json",
-	// 		success: function(data) {
-	// 			sideBarData = data.getSchool;
-	// 		}
-	// 	});		
-	// }
-	$.ajax({
-		url:"rsb.html", 
-		success: function(data) {
-			$("#vueRightSidebar").html(data);
-			rsb = vueRightSidebar();
-			enableTabs();
-			setTimeout(function() { $("#tabAdmissions").trigger("click") }, 1);
-			// openTab(event, 'Admissions');
-		}
-	});
-}
-
-
-function setGridBehaviors() {
 	$(".browse").on("click", function() {
 		let shiftVal = parseInt($(this).attr("value"));
 		updateGridHeaders(shiftVal);		
-	});
-
+	});	
 	$('.GridHeader').on("click", function() {
-//		sideBarType = "school";
-//		sideBarId = $('img', this).attr("schoolid");
-//		setSideBar(sideBarType, sideBarId);
+		stickySchoolCode = $('img', this).attr("schoolid");
 	});
 	$('.GridHeader').on("mouseover", function() {
 		let schoolid = $('img', this).attr("schoolid");
 		if (rsbSchoolID != schoolid) {
 			rsbSchoolID = schoolid;
 			rsb.refreshRightSidebar(schoolid);
-//			setSideBar("school", schoolid);
+		}
+	});
+	$('#EmptyBox').on("mouseover", function() {
+		if (stickySchoolCode != "") {
+			rsbSchoolID = stickySchoolCode;
+			rsb.refreshRightSidebar(stickySchoolCode);
 		}
 	});
 	$('#idWidget2').on("mouseleave", function() {
-//		console.log("idWidget2 :: mouseleave")
-//		setSideBar(sideBarType, sideBarId);
+		if (stickySchoolCode != "") {
+			// rsbSchoolID = stickySchoolCode;  // Not sure if this line should be commented or not and if it's needed in #EmptyBox function above 
+			rsb.refreshRightSidebar(stickySchoolCode);
+		}
 	});
 
 	// EXPAND/COLLAPSE SITE SUBLINKS
@@ -178,6 +167,7 @@ function updateGridHeaders(shiftVal) {
 		}
 	}
 
+	// Update the grid headers with school names/icons
 	let currSchool = "";
 	let vParent = "";
 	$(".SchoolName").each(function(index) {
@@ -212,15 +202,13 @@ function disableJump(school, site) {
 	let row = "";
 	let target = "";
 	let tgt = "";
+
+	// Get column position
 	let colPos = $("img[schoolid="+school+"]").parent().parent().index();
-	// console.log(colPos);
 	if (colPos > -1) {
+		// Get row position
 		row = $("div[site="+site+"]");
-		// row = $("div[site="+site+"]");
-		// console.log(target);
-
-// if (1 == 1) {
-
+		// Loop through all rows related to this site and switch to nojump class
 		$("div[site="+site+"]").each(function(idx, elem) {
 			tgt = $("div", elem).eq(colPos);
 			tgt.removeClass("jump");
@@ -228,30 +216,6 @@ function disableJump(school, site) {
 			tgt.prop("onclick", null).off("click");
 			tgt.prop("onmouseover", null).off("mouseover");
 		});
-
-// } else {
-// 		target = $("div", row).eq(colPos);
-// 		target.removeClass("jump");
-// 		target.addClass("nojump");
-// 		target.prop("onclick", null).off("click");
-// 		target.prop("onmouseover", null).off("mouseover");
-
-// 		site = row.attr("site");
-// 		// console.log("Site: " + site);
-
-// 		while (row.next().attr("site") == site) {
-// 			row = row.next();
-// 			// console.log(row.attr("value"));
-// 			// if (row.hasClass("sublink")) {
-// 				tgt = $("div", row).eq(colPos);
-// 				tgt.removeClass("jump");
-// 				tgt.addClass("nojump");
-// 				tgt.prop("onclick", null).off("click");
-// 				tgt.prop("onmouseover", null).off("mouseover");
-// 			// }
-// 		}
-// }
-
 	}
 }
 
@@ -307,7 +271,7 @@ function renderGrid(schoolStart) {
 					if (link[7].length > 0) {
 						gridOutput += '<img class="SiteIcon" src="/cfpimages/sites/icons/' + link[7] + '" /> ';
 					} else {
-						gridOutput += '<img class="SiteIcon" src="/cfpimages/space.png" />';
+						gridOutput += '<img class="SiteIcon" src="/cfpimages/space.png" style="margin-left: 0px;" />';
 					}
 					gridOutput += '<span class="SiteName">' + link[5] + '</span></p></div>';
 				} else {

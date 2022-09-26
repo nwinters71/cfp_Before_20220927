@@ -3,13 +3,15 @@
 </div>
 
 <!-- ICON/NAME/IMAGE -->
+<div style="background-color: #666; width:336px; height: 280px; margin: 0px auto 24px auto; text-align: center;">Advertisement</div>
 <div class="w3-container w3-white" style="border:height: 50px; position:sticky; top:74px; padding: 0px 0 3px 0; display:flex;">
 	<img id="sb_icon"  v-bind:src="school.Icon" height="36px" style="margin:4px;" /> &nbsp;
 	<h4 style="display:inline; font-weight:bold;" id="sb_schoolname">{{ school.FullName }}</h4>
 </div>
-<div v-if="hasImage" class="w3-container w3-yellow" style="width: 100%; padding: 0"><img id="sb_image" v-bind:src="school.Image" width="370px" height="200px" /></div>
+<div v-if="hasImage" class="w3-container" style="width: 100%; padding: 0"><img id="sb_image" v-bind:src="school.Image" width="370px" height="200px" /></div>
+<div v-else class="w3-container" style="width: 100%; padding: 0"><img id="sb_image" src="/cfpimages/generic-grad.jpg" width="370px" height="200px" /></div>
 <!-- TABS -->
-<div class="w3-bar" style="background-color: maroon; position:sticky; top:120px; z-index:10; padding: 0">
+<div class="w3-bar" style="background-color: white; position:sticky; top:120px; z-index:10; padding: 0">
 	<button id="tabAdmissions" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Admissions</button>
 	<button id="tabNotes" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Notes</button>
 	<button id="tabInfo" tabclass="rsb" class="tablink w3-bar-item w3-button" style="margin-left: 0px">Info</button>
@@ -120,6 +122,31 @@
 	</div>
 
 	<div id="contentNotes" tabclass="rsb" class="tabcontent">
+		<br />
+		Hello World
+		<select class="w3-third w3-blue w3-select w3-medium" id="sb_interest">
+			<option class="w3-gray" value="" disabled selected>Interest</option>
+			<option class="w3-lightgray">Not Interested</option>
+			<option class="w3-white">Not Very</option>
+			<option class="w3-white">Neutral</option>
+			<option class="w3-white">Somewhat</option>
+			<option class="w3-white">Very</option>
+		</select>
+		<select class="w3-third w3-blue w3-select w3-medium" id="sb_classification">
+			<option class="w3-gray" value="" disabled selected>Type</option>
+			<option class="w3-white">Safety</option>
+			<option class="w3-white">Target</option>
+			<option class="w3-white">Reach</option>
+		</select>
+		<select class="w3-third w3-blue w3-select w3-medium" id="sb_status">
+			<option class="w3-gray" value="" disabled selected>Status</option>
+			<option class="w3-white">Interested</option>
+			<option class="w3-white">Applied</option>
+			<option class="w3-white">Accepted</option>
+			<option class="w3-white">Waitlisted</option>
+			<option class="w3-white">Enrolled</option>
+			<option class="w3-white">Denied</option>
+		</select>
 		<strong style="font-size:15px">Interest: </strong>
 		<select id="sb_interest">
 			<option>Not Interested</option>
@@ -131,7 +158,7 @@
 
 		<br />
 		<strong style="font-size:15px">Classification: </strong>
-		<select id="sb_interest">
+		<select id="sb_interest2">
 			<option></option>
 			<option>Safety</option>
 			<option>Target</option>
@@ -140,7 +167,7 @@
 
 		<br />
 		<strong style="font-size:15px">Status: </strong>
-		<select id="sb_status">
+		<select id="sb_status2">
 			<option></option>
 			<option>Interested</option>
 			<option>Applied</option>
@@ -156,20 +183,58 @@
 	</div>
 
 	<div id="contentInfo" tabclass="rsb" class="tabcontent">
+			<tr><td colspan="2">
 		<br /><strong style="font-size:15px">Contact Info</strong>
 		<table id="contactinfo" style="border: 0px; width: 100%">
-			<tr><td width="100px">Phone:</td><td><span id="sb_phone">{{ school.phone }}</span></td></tr>            
+			<tr><td width="100px">Phone:</td><td><span id="sb_phone">{{ school.Phone }}</span></td></tr>            
 			<tr valign="top" style="margin-top:100px;">
 				<td>Address:</td>
 				<td><a id="side-address" target="_blank"><span id="sb_address_line1">{{ school.Address1 }}</span><span id="sb_address_line2">{{ school.City }}, {{ school.State }} {{ school.Zip }}</span></a></td>
 			</tr>
+			<tr v-if="school.Website"><td width="100px">Website:</td><td><span id="sb_phone"><a v-bind:href="school.Website">{{ school.Website }}</a></span></td></tr>            			
+			<div style="display:flex; justify-content: space-evenly; width:98%; margin:18px auto 0 auto;">
+				<div class="w3-button w3-blue" style="font-size: 15px; margin: 2px; padding: 6px;" v-if="school.VirtualTour"><a v-bind:href="school.VirtualTour">Virtual Tour</a></div>
+				<div class="w3-button w3-blue" style="font-size: 15px; margin: 2px; padding: 6px;" v-if="school.CampusMap"><a v-bind:href="school.CampusMap">Campus Map</a></div>
+				<div class="w3-button w3-blue" style="font-size: 15px; margin: 2px; padding: 6px;" v-if="school.Directions"><a v-bind:href="school.Directions">Directions</a></div>
+				<div class="w3-button w3-blue" style="font-size: 15px; margin: 2px; padding: 6px;" v-if="school.Parking"><a v-bind:href="school.Parking">Parking</a></div>
+			</div>
+			</td></tr>
 			<tr>
 				<td align="center" colspan="2" id="sb_map" v-html="schoolmap"></td>
 			</tr>
 		</table>
+
+
+	<div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; width: 150px; margin:8px auto;">
+		<div v-if="school.Facebook"><a v-bind:href="school.Facebook"><img src="/cfpimages/icon-facebook.png" width="28px" /></a></div>
+		<div v-if="school.LinkedIn"><a v-bind:href="school.LinkedIn"><img src="/cfpimages/icon-linkedin.png" width="28px" /></a></div>
+		<div v-if="school.Twitter"><a v-bind:href="school.Twitter"><img src="/cfpimages/icon-twitter.png" width="28px" /></a></div>
+		<div v-if="school.Instagram"><a v-bind:href="school.Instagram"><img src="/cfpimages/icon-instagram.png" width="28px" /></a></div>
+		<div v-if="school.Youtube"><a v-bind:href="school.Youtube"><img src="/cfpimages/icon-youtube.png" width="28px" /></a></div>
+	</div>
+
+		<ol>
+			<!-- <li v-if="school.Website"><a v-bind:href="school.Website">{{ school.Website }}</a></li> -->
+			<li v-if="school.About"><a v-bind:href="school.About">About</a></li>
+			<li v-if="school.Visit"><a v-bind:href="school.Visit">Visit</a></li>
+			<li v-if="school.ContactInfo"><a v-bind:href="school.ContactInfo">ContactInfo</a></li>
+			<li v-if="school.RequestInfo"><a v-bind:href="school.RequestInfo">RequestInfo</a></li>
+		</ol>
 	</div>
 	<div id="contentGear" tabclass="rsb" class="tabcontent">
-		<br /><strong style="font-size:15px">School Gear</strong>
+		<br /><strong style="font-size:15px">School Gear2</strong>
+		<table class="w3-table">
+			<tr>
+				<th>Area of Study</th>
+				<th>Majors</th>
+				<th>Undergrads</th>
+			</tr>
+			<tr v-for="m in majors">
+				<td>{{ m.cipTitle }}</td>
+				<td>{{ m.NumberOfMajors }}</td>
+				<td>{{ m.NumberOfUnderGradsMajor }}</td>
+			</tr>
+		</table>
 	</div>
 
 </div>

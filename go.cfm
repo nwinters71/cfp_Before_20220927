@@ -19,23 +19,30 @@
 	and  	SS.SchoolCode = <cfqueryparam cfsqltype="cf_sql_char" maxlength="6" value="#url.s#">
 </cfquery>
 
+
 <!--- <cfdump var="#getURL#"><cfabort> --->
 
-<!--- Log Click --->
-<cfquery name="logClick" datasource="CFP">
-	INSERT	INTO tblClickLog
-			(UserUUID, SchoolCode, SiteCode, LinkCode, ClickTime)  <!--- , UserLocation, LinkLocation --->
-	VALUES  (	
-				<cfqueryparam cfsqltype="cf_sql_varchar" maxlength="36" value="#session.user.uuid#">,
-				<cfqueryparam cfsqltype="cf_sql_char" maxlength="5" value="#url.s#">,
-				<cfqueryparam cfsqltype="cf_sql_char" maxlength="4" value="#getURL.SiteCode#">,
-				<cfqueryparam cfsqltype="cf_sql_char" maxlength="4" value="#url.l#">,
-				SysDate()
-				<!--- <cfqueryparam cfsqltype="cf_sql_char" maxlength="6" value="#userlocation#">,
-				<cfqueryparam cfsqltype="cf_sql_char" maxlength="6" value="#linklocation#"> --->
-			)
-</cfquery>
+<cftry>
+	<!--- Log Click --->
+	<cfquery name="logClick" datasource="CFP">
+		INSERT	INTO tblClickLog
+				(UserUUID, SchoolCode, SiteCode, LinkCode, ClickTime)  <!--- , UserLocation, LinkLocation --->
+		VALUES  (	
+					<cfqueryparam cfsqltype="cf_sql_varchar" maxlength="36" value="#session.user.uuid#">,
+					<cfqueryparam cfsqltype="cf_sql_char" maxlength="5" value="#url.s#">,
+					<cfqueryparam cfsqltype="cf_sql_char" maxlength="4" value="#getURL.SiteCode#">,
+					<cfqueryparam cfsqltype="cf_sql_char" maxlength="4" value="#url.l#">,
+					SysDate()
+					<!--- <cfqueryparam cfsqltype="cf_sql_char" maxlength="6" value="#userlocation#">,
+					<cfqueryparam cfsqltype="cf_sql_char" maxlength="6" value="#linklocation#"> --->
+				)
+	</cfquery>
+	<cfcatch>
+		<!--- <cfdump var="#session#">
+		<cfabort> --->
+	</cfcatch>
 
+</cftry>
 
 
 <!--- <cfdump var="#getURL#" /><cfabort> --->

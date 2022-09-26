@@ -121,15 +121,23 @@
 					</div>
 				</div>
 
+
+
+				<!-- <input class="searchInput" id="keyword" type="text" size="14" v-model="keyword" v-on:keyup="getSchools" />
+				<button @click="test">Search</button> -->
+
 				<div class="section" onclick="toggle('location')">Location</div>
 				<div id="location">
 					<div class="label">State(s):</div>
 					<div id="conState" class="searchcontainer">
-						<input id="state" type="checkbox" value="AL" /> Alabama
-						<br /><input id="state" type="checkbox" value="AK" /> Alaska
-						<br /><input id="state" type="checkbox" value="AK" /> Arkansas
-						<br /><input id="state" type="checkbox" value="CA" /> California
-						<br /><input id="state" type="checkbox" value="CO" /> Colorado
+						<input id="AL" type="checkbox" value="AL" v-model="state" @click="getSchools" /> Alabama
+						<br /><input id="AK" type="checkbox" value="AK" v-model="state" @click="getSchools" /> Alaska
+						<br /><input id="AR" type="checkbox" value="AR" v-model="state" @click="getSchools" /> Arkansas
+						<br /><input id="CA" type="checkbox" value="CA" v-model="state" @click="getSchools" /> California
+						<br /><input id="CO" type="checkbox" value="CO" v-model="state" @click="getSchools" /> Colorado
+						<br /><input id="GA" type="checkbox" value="GA" v-model="state" @click="getSchools" /> Georgia
+						<br /><input id="HI" type="checkbox" value="HI" v-model="state" @click="getSchools" /> Hawaii
+						<br /><input id="IL" type="checkbox" value="IL" v-model="state" @click="getSchools" /> Illinois
 					</div>
 					<div style="float:right" onclick="allToggle('conState')">Show all states</div>
 					<div class="label">Region(s):</div>
@@ -177,7 +185,7 @@
 
 
 <!-- MY SCHOOLS -->
-			<div id="contentMySchools" tabclass="search" class="tabcontent w3-container" style="padding: 0; width:100%; border: thin black solid;">
+			<div id="contentMySchools" tabclass="search" class="tabcontent w3-container" style="padding: 0; width:100%; border: thin #AAA solid;">
 				<div v-for="m in mySchoolList" class="w3-card">
 					<div class="w3-container" style="padding:8px; margin-top: 0px;">
 						<template v-if="m.Icon != ''">
@@ -206,7 +214,7 @@
 
 
 <!-- SEARCH RESULTS -->
-			<div id="contentSearchResults" tabclass="search" class="tabcontent w3-container" style="padding:0; width:100%; border: thin black solid;">
+			<div id="contentSearchResults" tabclass="search" class="tabcontent w3-container" style="padding:0; width:100%; border: thin #AAA solid;">
 				<div v-for="m in matches" class="w3-card">
 					<div class="w3-container" style="padding:8px; margin-top: 0px;">
 						<template v-if="m.Icon != ''">

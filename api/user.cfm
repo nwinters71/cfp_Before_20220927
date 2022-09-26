@@ -163,7 +163,7 @@
 			 --->
  			<cfif isValid("email", form.email)>
 				<cfset qryUser = cfcLogin.AddUser(form.email, form.password, form.firstname) />
-				<cfif addUser.status EQ "Success">
+				<cfif qryUser.status EQ "Success">
 					<!--- Set Session Variables --->
 
 					<cfset session.user.loggedIn = true />
@@ -182,8 +182,9 @@
 				<cfelse>
 					<cfset resp.status = "Fail" />
 					<!--- Check if user exists --->
-					<cfset getUser = cfcLogin.getUser(form.email, form.password) />
-					<cfif getUser.exists>
+					<cfset getUser = cfcLogin.getUser(form.email, "Email") />
+					<cfdump var="#getUser#">
+					<cfif getUser.status EQ "Success">
 					<!--- User Exists --->
 						<cfset resp.message = 'An account already exists for this email address.<br /><br /><a href="/cfp/api/user.cfm?reset&email=#form.email#">Click here an email to reset your password</a>' />
 						<!--- <cfset qryUser = cfcLogin.AuthUser(form.email, form.password) /> --->
